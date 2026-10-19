@@ -9,12 +9,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="اسکناس">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#090d16" id="theme-color-meta">
+    <meta name="theme-color" content="#070b14" id="theme-color-meta">
     <meta name="format-detection" content="telephone=no">
 
     <title>اسکناس | نرخ لحظه‌ای بازار و مدیریت پرتفولیو iOS</title>
 
-    <!-- Dynamic Apple Touch Icon & PWA Manifest injected via SVG data URI -->
+    <!-- Dynamic Apple Touch Icon & PWA Manifest -->
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230f172a'/%3E%3Cstop offset='50%25' stop-color='%231e293b'/%3E%3Cstop offset='100%25' stop-color='%23090d16'/%3E%3C/linearGradient%3E%3ClinearGradient id='gold' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23fbbf24'/%3E%3Cstop offset='100%25' stop-color='%23d97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Ccircle cx='90' cy='90' r='58' fill='none' stroke='url(%23gold)' stroke-width='6' opacity='0.35'/%3E%3Cpath d='M48 112 L76 84 L98 102 L132 62' fill='none' stroke='url(%23gold)' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='132' cy='62' r='8' fill='%2334d399'/%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,12 +35,6 @@
                         ios: {
                             darkBg: '#070b14',
                             lightBg: '#eef2f9',
-                            blue: '#0A84FF',
-                            green: '#30D158',
-                            red: '#FF453A',
-                            gold: '#FFD60A',
-                            purple: '#BF5AF2',
-                            cyan: '#64D2FF'
                         }
                     }
                 }
@@ -64,16 +58,16 @@
 
         body {
             padding-top: max(var(--safe-top), 14px);
-            padding-bottom: calc(max(var(--safe-bottom), 24px) + 76px);
+            padding-bottom: calc(max(var(--safe-bottom), 24px) + 78px);
             padding-left: var(--safe-left);
             padding-right: var(--safe-right);
             overflow-x: hidden;
             user-select: none;
             -webkit-user-select: none;
-            transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.3s ease;
         }
 
-        /* Ambient iOS Mesh Gradient Background */
+        /* Ambient iOS Mesh Background */
         .ambient-bg {
             position: fixed;
             inset: 0;
@@ -86,14 +80,9 @@
             position: absolute;
             border-radius: 9999px;
             filter: blur(85px);
-            opacity: 0.38;
+            opacity: 0.35;
             transition: all 0.7s ease;
             animation: floatOrb 16s infinite alternate ease-in-out;
-        }
-
-        html:not(.dark) .ambient-orb {
-            opacity: 0.25;
-            filter: blur(95px);
         }
 
         @keyframes floatOrb {
@@ -102,42 +91,75 @@
             100% { transform: translate(20px, -20px) scale(0.95); }
         }
 
-        /* iOS Frosted Glassmorphism Cards */
-        .ios-glass {
-            background: rgba(255, 255, 255, 0.68);
+        /* SECTION 1: Time & Calendar Theme (Sky/Teal Tint) */
+        .theme-section-clock {
+            background: linear-gradient(135deg, rgba(14, 116, 144, 0.16) 0%, rgba(2, 132, 199, 0.10) 100%);
             backdrop-filter: blur(24px) saturate(190%);
             -webkit-backdrop-filter: blur(24px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08),
-                        inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-                        background-color 0.3s ease,
-                        border-color 0.3s ease,
-                        box-shadow 0.3s ease;
+            border: 1px solid rgba(56, 189, 248, 0.32);
+            box-shadow: 0 14px 38px -10px rgba(14, 116, 144, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .dark .theme-section-clock {
+            background: linear-gradient(135deg, rgba(8, 47, 73, 0.72) 0%, rgba(15, 23, 42, 0.78) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            box-shadow: 0 18px 44px -12px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(56, 189, 248, 0.25);
         }
 
+        /* SECTION 2: Live Markets Theme (Amber/Gold Tint) */
+        .theme-section-markets {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.12) 0%, rgba(245, 158, 11, 0.08) 100%);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 14px 38px -10px rgba(217, 119, 6, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .dark .theme-section-markets {
+            background: linear-gradient(135deg, rgba(69, 38, 12, 0.65) 0%, rgba(15, 23, 42, 0.78) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.22);
+            box-shadow: 0 18px 44px -12px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(251, 191, 36, 0.22);
+        }
+
+        /* SECTION 3: My Assets Theme (Emerald/Green Tint) */
+        .theme-section-assets {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.14) 0%, rgba(16, 185, 129, 0.08) 100%);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid rgba(52, 211, 153, 0.32);
+            box-shadow: 0 14px 38px -10px rgba(5, 150, 105, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .dark .theme-section-assets {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.68) 0%, rgba(15, 23, 42, 0.78) 100%);
+            border: 1px solid rgba(52, 211, 153, 0.22);
+            box-shadow: 0 18px 44px -12px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(52, 211, 153, 0.22);
+        }
+
+        /* SECTION 4: Portfolio Analytics Theme (Purple/Indigo Tint) */
+        .theme-section-portfolio {
+            background: linear-gradient(135deg, rgba(126, 34, 206, 0.14) 0%, rgba(99, 102, 241, 0.09) 100%);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid rgba(168, 85, 247, 0.32);
+            box-shadow: 0 14px 38px -10px rgba(126, 34, 206, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .dark .theme-section-portfolio {
+            background: linear-gradient(135deg, rgba(59, 7, 100, 0.7) 0%, rgba(15, 23, 42, 0.78) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.22);
+            box-shadow: 0 18px 44px -12px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(168, 85, 247, 0.22);
+        }
+
+        /* Generic Glassmorphism Card inside Sections */
+        .ios-glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
         .dark .ios-glass {
-            background: rgba(20, 29, 47, 0.62);
-            border: 1px solid rgba(255, 255, 255, 0.11);
-            box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.55),
-                        inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
-        }
-
-        /* Elevated Specular Glass for Hero Widgets */
-        .ios-glass-hero {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(240, 246, 255, 0.64) 100%);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            box-shadow: 0 20px 45px -15px rgba(37, 99, 235, 0.14),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
-        }
-
-        .dark .ios-glass-hero {
-            background: linear-gradient(135deg, rgba(30, 41, 69, 0.75) 0%, rgba(13, 20, 36, 0.78) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 22px 48px -12px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
+            background: rgba(20, 29, 47, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
         }
 
         /* Subtle Press Feedback */
@@ -145,35 +167,23 @@
             transform: scale(0.97);
         }
 
-        /* Custom Scrollbar Hiding for iOS Pill Bars */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        /* No scrollbar utility */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Price Flash Animation on Live Tick */
+        /* Price Tick Flash */
         @keyframes pulseUp {
-            0% { background-color: rgba(48, 209, 88, 0.24); }
+            0% { background-color: rgba(48, 209, 88, 0.25); }
             100% { background-color: transparent; }
         }
         @keyframes pulseDown {
-            0% { background-color: rgba(255, 69, 58, 0.24); }
+            0% { background-color: rgba(255, 69, 58, 0.25); }
             100% { background-color: transparent; }
         }
-        .flash-up {
-            animation: pulseUp 1.1s ease-out;
-        }
-        .flash-down {
-            animation: pulseDown 1.1s ease-out;
-        }
+        .flash-up { animation: pulseUp 1.1s ease-out; }
+        .flash-down { animation: pulseDown 1.1s ease-out; }
 
-        /* Tabular Persian/Digits Alignment */
-        .tabular-nums-fa {
-            font-variant-numeric: tabular-nums;
-        }
+        .tabular-nums-fa { font-variant-numeric: tabular-nums; }
     </style>
 </head>
 
@@ -181,7 +191,7 @@
 
     <!-- Ambient iOS Background Orbs -->
     <div class="ambient-bg">
-        <div class="ambient-orb w-80 h-80 bg-blue-600 -top-16 -right-16"></div>
+        <div class="ambient-orb w-80 h-80 bg-sky-500 -top-16 -right-16"></div>
         <div class="ambient-orb w-96 h-96 bg-amber-500/70 top-1/3 -left-28" style="animation-delay: -5s;"></div>
         <div class="ambient-orb w-80 h-80 bg-emerald-500/70 bottom-12 right-8" style="animation-delay: -10s;"></div>
         <div class="ambient-orb w-72 h-72 bg-purple-600/60 bottom-1/4 left-1/3" style="animation-delay: -3s;"></div>
@@ -190,11 +200,11 @@
     <!-- Main Container -->
     <div class="max-w-3xl mx-auto px-3.5 sm:px-6 space-y-5">
 
-        <!-- Top App Bar: App Identity, Live Status, PWA Guide & Dark/Light Mode Switch -->
+        <!-- Top App Bar: App Identity & Dark/Light Mode Switch -->
         <header class="flex items-center justify-between pt-1">
             <div class="flex items-center gap-3">
                 <div class="w-11 h-11 rounded-2xl ios-glass flex items-center justify-center shadow-md relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-blue-500/20 to-amber-400/20"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-sky-500/20 to-amber-400/20"></div>
                     <i class="fa-solid fa-money-bill-trend-up text-xl text-emerald-500 dark:text-emerald-400 relative z-10"></i>
                 </div>
                 <div>
@@ -202,9 +212,9 @@
                         <h1 class="text-lg sm:text-xl font-black tracking-tight bg-gradient-to-l from-slate-900 via-slate-700 to-slate-800 dark:from-white dark:via-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
                             اسکناس
                         </h1>
-                        <span id="connection-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                            <span id="connection-status-text">بروز و زنده</span>
+                            <span>بروز و زنده</span>
                         </span>
                     </div>
                     <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
@@ -213,14 +223,9 @@
                 </div>
             </div>
 
-            <!-- Action Buttons: Install PWA Guide, Refresh Prices, Dark Mode Toggle -->
+            <!-- Action Buttons: Refresh, Dark Mode Toggle -->
             <div class="flex items-center gap-2">
-                <button onclick="openPwaModal()" title="نصب روی آیفون (Add to Home Screen)" class="ios-glass ios-press h-10 px-3 rounded-2xl flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:border-blue-400/50">
-                    <i class="fa-brands fa-apple text-base"></i>
-                    <span class="hidden sm:inline">نصب در آیفون</span>
-                </button>
-
-                <button onclick="triggerMarketSync(true)" id="refresh-btn" title="بروزرسانی نرخ‌ها" class="ios-glass ios-press w-10 h-10 rounded-2xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-500">
+                <button onclick="triggerMarketSync(true)" id="refresh-btn" title="بروزرسانی نرخ‌ها" class="ios-glass ios-press w-10 h-10 rounded-2xl flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-sky-500">
                     <i id="refresh-icon" class="fa-solid fa-arrows-rotate text-sm transition-transform duration-500"></i>
                 </button>
 
@@ -230,17 +235,14 @@
             </div>
         </header>
 
-        <!-- SECTION 2: LIVE CLOCK & CALENDAR WIDGET (time.ir synchronized) -->
-        <section aria-label="ساعت و تقویم زنده" class="ios-glass-hero rounded-3xl p-4 sm:p-5 relative overflow-hidden">
-            <!-- Decorative Specular Glow -->
-            <div class="absolute -top-20 -left-20 w-52 h-52 bg-blue-500/15 dark:bg-blue-400/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-20 -right-16 w-48 h-48 bg-amber-500/15 dark:bg-amber-400/10 rounded-full blur-2xl pointer-events-none"></div>
+        <!-- SECTION 1: LIVE CLOCK & CALENDAR WIDGET (Sky / Teal Theme) -->
+        <section id="section-clock" aria-label="ساعت و تقویم زنده" class="theme-section-clock rounded-3xl p-4 sm:p-5 relative overflow-hidden">
+            <div class="absolute -top-20 -left-20 w-52 h-52 bg-sky-500/15 dark:bg-sky-400/10 rounded-full blur-2xl pointer-events-none"></div>
 
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 relative z-10">
                 
-                <!-- Right Column: Live Tehran Digital Clock & Source Tag -->
+                <!-- Right Column: Live Tehran Clock -->
                 <div class="flex items-center justify-between sm:justify-start gap-4">
-                    <!-- Circular Second Progress Ring + Icon -->
                     <div class="relative w-16 h-16 flex items-center justify-center shrink-0">
                         <svg class="w-16 h-16 -rotate-90 transform" viewBox="0 0 64 64">
                             <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="3.5" fill="transparent" class="text-slate-200/70 dark:text-slate-800/80" />
@@ -248,20 +250,20 @@
                             <defs>
                                 <linearGradient id="clockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#38bdf8" />
-                                    <stop offset="100%" stop-color="#f59e0b" />
+                                    <stop offset="100%" stop-color="#0ea5e9" />
                                 </linearGradient>
                             </defs>
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <i class="fa-regular fa-clock text-blue-500 dark:text-sky-400 text-xs mb-0.5"></i>
+                            <i class="fa-regular fa-clock text-sky-500 dark:text-sky-400 text-xs mb-0.5"></i>
                             <span id="live-seconds-badge" class="text-xs font-extrabold tabular-nums-fa text-slate-700 dark:text-slate-200">۰۰</span>
                         </div>
                     </div>
 
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-sky-400 border border-blue-500/20 flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                            <span class="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
                                 افق تهران (Time.ir)
                             </span>
                             <span id="day-night-label" class="text-[11px] text-slate-500 dark:text-slate-400 font-medium"></span>
@@ -271,25 +273,23 @@
                             <span id="live-time-hm" class="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
                                 00:00
                             </span>
-                            <span id="live-time-sec" class="text-lg sm:text-xl font-bold text-amber-500 dark:text-amber-400">
+                            <span id="live-time-sec" class="text-lg sm:text-xl font-bold text-sky-500 dark:text-sky-400">
                                 :00
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Divider on Mobile / Vertical Line on Desktop -->
-                <div class="h-px sm:h-14 sm:w-px bg-slate-300/60 dark:bg-slate-700/60"></div>
+                <div class="h-px sm:h-14 sm:w-px bg-sky-300/40 dark:bg-sky-700/40"></div>
 
-                <!-- Left Column: Dual Calendar Cards (Solar Hijri & Gregorian) -->
+                <!-- Left Column: Dual Calendar Cards -->
                 <div class="grid grid-cols-2 gap-2.5 flex-1">
-                    <!-- Solar Hijri Date (شمسی) -->
-                    <div class="ios-glass rounded-2xl p-2.5 sm:p-3 flex flex-col justify-between border border-amber-500/20">
+                    <div class="ios-glass rounded-2xl p-2.5 sm:p-3 flex flex-col justify-between border border-sky-500/20">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">
+                            <span class="text-[10px] font-bold text-sky-700 dark:text-sky-300 bg-sky-500/10 px-2 py-0.5 rounded-md">
                                 خورشیدی (شمسی)
                             </span>
-                            <i class="fa-solid fa-calendar-day text-xs text-amber-500/80"></i>
+                            <i class="fa-solid fa-calendar-day text-xs text-sky-500"></i>
                         </div>
                         <div class="mt-1.5">
                             <div id="jalali-text" class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100 truncate">
@@ -301,13 +301,12 @@
                         </div>
                     </div>
 
-                    <!-- Gregorian Date (میلادی) -->
-                    <div class="ios-glass rounded-2xl p-2.5 sm:p-3 flex flex-col justify-between border border-blue-500/20">
+                    <div class="ios-glass rounded-2xl p-2.5 sm:p-3 flex flex-col justify-between border border-teal-500/20">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-blue-600 dark:text-sky-400 bg-blue-500/10 px-2 py-0.5 rounded-md">
+                            <span class="text-[10px] font-bold text-teal-700 dark:text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded-md">
                                 میلادی (Gregorian)
                             </span>
-                            <i class="fa-solid fa-earth-americas text-xs text-blue-500/80"></i>
+                            <i class="fa-solid fa-earth-americas text-xs text-teal-500"></i>
                         </div>
                         <div class="mt-1.5" dir="ltr">
                             <div id="gregorian-text" class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-100 truncate text-left">
@@ -323,43 +322,43 @@
             </div>
         </section>
 
-        <!-- SECTION 3: ADVERTISING PLACEHOLDER (AFTER CLOCK & BEFORE LIVE MARKET RATES) -->
+        <!-- SECTION 1.5: ADVERTISING BANNER (Placed after clock/calendar, before market rates) -->
         <section aria-label="فضای تبلیغات" class="py-0.5">
-            <div class="ios-glass rounded-3xl p-4 sm:p-5 relative overflow-hidden border border-dashed border-blue-400/40 dark:border-sky-400/30 group">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/10 to-amber-500/5 pointer-events-none"></div>
+            <div class="ios-glass rounded-3xl p-4 sm:p-5 relative overflow-hidden border border-dashed border-sky-400/50 dark:border-sky-400/30 group">
+                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-purple-500/10 to-amber-500/5 pointer-events-none"></div>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10 text-center sm:text-right">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-blue-500/15 dark:bg-sky-400/15 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-sky-400 shrink-0">
+                        <div class="w-10 h-10 rounded-2xl bg-sky-500/15 dark:bg-sky-400/15 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400 shrink-0">
                             <i class="fa-solid fa-bullhorn text-base"></i>
                         </div>
                         <div>
                             <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-md bg-slate-500/10 text-slate-500 dark:text-slate-400">
                                 فضای ویژه تبلیغات و اسپانسرینگ در اسکناس
                             </span>
-                            <p dir="ltr" class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-white mt-1 select-all font-mono tracking-wide">
+                            <p dir="ltr" class="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white mt-1 select-all font-mono tracking-wide">
                                 contact for ads: Mahbodq@gmail.com
                             </p>
                         </div>
                     </div>
 
+                    <!-- Action Buttons: Copy Email & Telegram Link -->
                     <div class="flex items-center gap-2">
-                        <button onclick="copyAdEmail()" class="ios-glass ios-press px-3 py-1.5 rounded-xl text-xs font-bold text-blue-600 dark:text-sky-400 flex items-center gap-1.5">
+                        <button onclick="copyAdEmail()" class="ios-glass ios-press px-3 py-1.5 rounded-xl text-xs font-bold text-sky-600 dark:text-sky-400 flex items-center gap-1.5">
                             <i class="fa-regular fa-copy"></i>
                             <span id="copy-ad-label">کپی ایمیل</span>
                         </button>
-                        <a href="mailto:Mahbodq@gmail.com?subject=Advertising%20Inquiry%20-%20Eskenas%20iOS%20PWA" class="ios-glass ios-press px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                            <i class="fa-regular fa-paper-plane"></i>
-                            <span>ارسال پیام</span>
+                        <a href="https://t.me/Dobham" target="_blank" rel="noopener noreferrer" class="ios-glass ios-press px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#229ED9] dark:text-[#32B4F0] flex items-center gap-1.5 bg-[#229ED9]/10 border-[#229ED9]/30">
+                            <i class="fa-brands fa-telegram text-sm"></i>
+                            <span>تلگرام (Dobham)</span>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 4: LIVE MARKET RATES (TGJU.ORG) -->
-        <section id="section-markets" aria-label="نرخ‌های لحظه‌ای بازار" class="space-y-3.5">
-            <!-- Section Header & Customize Trigger -->
+        <!-- SECTION 2: LIVE MARKET RATES (Amber / Gold Theme) -->
+        <section id="section-markets" aria-label="نرخ‌های لحظه‌ای بازار" class="theme-section-markets rounded-3xl p-4 sm:p-5 space-y-3.5">
             <div class="flex flex-wrap items-center justify-between gap-2 px-1">
                 <div class="flex items-center gap-2.5">
                     <div class="w-2 h-6 rounded-full bg-gradient-to-b from-amber-400 to-amber-600"></div>
@@ -369,16 +368,15 @@
                                 نرخ‌های لحظه‌ای بازار
                             </h2>
                             <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full ios-glass text-slate-500 dark:text-slate-300">
-                                منبع: TGJU.org
+                                TGJU.org
                             </span>
                         </div>
                         <p id="last-sync-text" class="text-[11px] text-slate-500 dark:text-slate-400">
-                            بروزرسانی زنده • قیمت‌ها به تومان (کریپتو: تومان و دلار)
+                            بروزرسانی زنده • قیمت‌ها به تومان
                         </p>
                     </div>
                 </div>
 
-                <!-- Customize Home Screen Items Button -->
                 <button onclick="openCustomizeModal()" class="ios-glass ios-press px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-amber-400/50 shadow-sm">
                     <i class="fa-solid fa-sliders text-amber-500"></i>
                     <span>شخصی‌سازی صفحه</span>
@@ -390,7 +388,7 @@
 
             <!-- Category Quick Filter Pills -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 px-0.5">
-                <button onclick="setMarketCategory('all')" data-cat="all" class="market-cat-btn ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-bold transition-all bg-blue-600 text-white shadow-md shadow-blue-500/25">
+                <button onclick="setMarketCategory('all')" data-cat="all" class="market-cat-btn ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-bold transition-all bg-amber-600 text-white shadow-md shadow-amber-500/25">
                     همه منتخب‌ها
                 </button>
                 <button onclick="setMarketCategory('gold')" data-cat="gold" class="market-cat-btn ios-glass ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
@@ -411,15 +409,13 @@
                 </button>
             </div>
 
-            <!-- Live Market Rates Grid -->
             <div id="market-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 <!-- Populated dynamically via JS -->
             </div>
         </section>
 
-        <!-- SECTION 5: MY ASSETS («دارایی های من») -->
-        <section id="section-assets" aria-label="دارایی های من" class="space-y-4">
-            <!-- Header & "+ افزودن دارایی" Button -->
+        <!-- SECTION 3: MY ASSETS (Emerald / Green Theme) -->
+        <section id="section-assets" aria-label="دارایی های من" class="theme-section-assets rounded-3xl p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between px-1">
                 <div class="flex items-center gap-2.5">
                     <div class="w-2 h-6 rounded-full bg-gradient-to-b from-emerald-400 to-teal-600"></div>
@@ -433,16 +429,16 @@
                     </div>
                 </div>
 
-                <button onclick="openAssetModal()" class="ios-press px-4 py-2.5 rounded-2xl bg-gradient-to-l from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-blue-600/30 flex items-center gap-2">
+                <button onclick="openAssetModal()" class="ios-press px-4 py-2.5 rounded-2xl bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-emerald-600/30 flex items-center gap-2">
                     <i class="fa-solid fa-plus text-xs"></i>
                     <span>+ افزودن دارایی</span>
                 </button>
             </div>
 
-            <!-- Total Portfolio Value Hero Card (3 Simultaneous Currencies: Toman, Rial, Live USD) -->
-            <div class="ios-glass-hero rounded-3xl p-5 sm:p-6 relative overflow-hidden">
+            <!-- Total Portfolio Value Hero Card -->
+            <div class="ios-glass rounded-3xl p-5 sm:p-6 relative overflow-hidden border border-emerald-500/25">
                 <div class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-teal-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative z-10 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2">
@@ -454,14 +450,9 @@
                                 ارزش کل دارایی‌های ثبت‌شده
                             </span>
                         </div>
-
-                        <!-- 24h Overall Weighted Change Badge -->
-                        <div id="portfolio-24h-badge" class="px-2.5 py-1 rounded-xl text-xs font-extrabold tabular-nums-fa flex items-center gap-1">
-                            <!-- Updated by JS -->
-                        </div>
+                        <div id="portfolio-24h-badge" class="px-2.5 py-1 rounded-xl text-xs font-extrabold tabular-nums-fa flex items-center gap-1"></div>
                     </div>
 
-                    <!-- Primary Display: Toman -->
                     <div class="py-1">
                         <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-0.5">
                             ۱. معادل تومانی کل سرمایه:
@@ -470,15 +461,13 @@
                             <span id="total-toman" class="text-2xl sm:text-4xl font-black tracking-tight tabular-nums-fa text-slate-900 dark:text-white">
                                 ۰
                             </span>
-                            <span class="text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-lg">
+                            <span class="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-lg">
                                 تومان
                             </span>
                         </div>
                     </div>
 
-                    <!-- Secondary Grid: Rial & Live USD Value -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                        <!-- 2. Rial Value -->
                         <div class="ios-glass rounded-2xl p-3.5 border border-slate-300/40 dark:border-white/10">
                             <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-semibold mb-1">
                                 <span>۲. معادل ریالی (Rial)</span>
@@ -492,7 +481,6 @@
                             </div>
                         </div>
 
-                        <!-- 3. Live USD Value -->
                         <div class="ios-glass rounded-2xl p-3.5 border border-emerald-500/25">
                             <div class="flex items-center justify-between text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold mb-1">
                                 <span>۳. ارزش دلاری لحظه‌ای (USD)</span>
@@ -510,17 +498,16 @@
                 </div>
             </div>
 
-            <!-- User's Registered Assets List -->
             <div id="user-assets-list" class="space-y-2.5">
                 <!-- Populated dynamically via JS -->
             </div>
         </section>
 
-        <!-- SECTION 6: PORTFOLIO ANALYSIS (تحلیل پرتفولیو) -->
-        <section id="section-portfolio" aria-label="تحلیل پرتفولیو" class="space-y-4 pt-2">
+        <!-- SECTION 4: PORTFOLIO ANALYSIS (Purple / Indigo Theme) -->
+        <section id="section-portfolio" aria-label="تحلیل پرتفولیو" class="theme-section-portfolio rounded-3xl p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between px-1">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-2 h-6 rounded-full bg-gradient-to-b from-purple-500 to-blue-500"></div>
+                    <div class="w-2 h-6 rounded-full bg-gradient-to-b from-purple-500 to-indigo-600"></div>
                     <div>
                         <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
                             تحلیل بازدهی پرتفولیو (Portfolio)
@@ -532,78 +519,45 @@
                 </div>
             </div>
 
-            <div class="ios-glass-hero rounded-3xl p-4 sm:p-6 space-y-5">
-                <!-- Timeframe Selector Tabs (1M, 3M, 5M, 6M, 1Y, 2Y, 3Y, 4Y) -->
-                <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar p-1 rounded-2xl bg-slate-200/70 dark:bg-slate-900/70 border border-slate-300/50 dark:border-white/5">
-                    <button onclick="selectPortfolioPeriod('1M')" data-period="1M" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۱ ماهه
-                    </button>
-                    <button onclick="selectPortfolioPeriod('3M')" data-period="3M" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۳ ماهه
-                    </button>
-                    <button onclick="selectPortfolioPeriod('5M')" data-period="5M" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۵ ماهه
-                    </button>
-                    <button onclick="selectPortfolioPeriod('6M')" data-period="6M" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۶ ماهه
-                    </button>
-                    <button onclick="selectPortfolioPeriod('1Y')" data-period="1Y" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۱ ساله
-                    </button>
-                    <button onclick="selectPortfolioPeriod('2Y')" data-period="2Y" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۲ ساله
-                    </button>
-                    <button onclick="selectPortfolioPeriod('3Y')" data-period="3Y" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۳ ساله
-                    </button>
-                    <button onclick="selectPortfolioPeriod('4Y')" data-period="4Y" class="period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all">
-                        ۴ ساله
-                    </button>
+            <div class="ios-glass rounded-3xl p-4 sm:p-6 space-y-5 border border-purple-500/25">
+                <!-- Timeframe Selector Tabs -->
+                <div class="flex items-center gap-1 overflow-x-auto no-scrollbar p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300/50 dark:border-white/10">
+                    <button onclick="selectPortfolioPeriod('1M')" data-period="1M" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۱ ماهه</button>
+                    <button onclick="selectPortfolioPeriod('3M')" data-period="3M" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۳ ماهه</button>
+                    <button onclick="selectPortfolioPeriod('5M')" data-period="5M" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۵ ماهه</button>
+                    <button onclick="selectPortfolioPeriod('6M')" data-period="6M" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۶ ماهه</button>
+                    <button onclick="selectPortfolioPeriod('1Y')" data-period="1Y" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۱ ساله</button>
+                    <button onclick="selectPortfolioPeriod('2Y')" data-period="2Y" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۲ ساله</button>
+                    <button onclick="selectPortfolioPeriod('3Y')" data-period="3Y" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۳ ساله</button>
+                    <button onclick="selectPortfolioPeriod('4Y')" data-period="4Y" class="period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all">۴ ساله</button>
                 </div>
 
-                <!-- Return Metrics Summary Cards (Percentage, Toman PnL, USD PnL) -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <!-- Percentage Return -->
                     <div class="ios-glass rounded-2xl p-3.5 flex flex-col justify-between">
                         <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
                             درصد تغییرات دوره (<span id="period-label-title">۱ ماهه</span>)
                         </span>
-                        <div id="pnl-percent" class="text-xl sm:text-2xl font-black tabular-nums-fa mt-1">
-                            +۰.۰۰٪
-                        </div>
+                        <div id="pnl-percent" class="text-xl sm:text-2xl font-black tabular-nums-fa mt-1">+۰.۰۰٪</div>
                     </div>
 
-                    <!-- Toman Profit/Loss -->
                     <div class="ios-glass rounded-2xl p-3.5 flex flex-col justify-between">
-                        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                            میزان سود / زیان (تومان)
-                        </span>
-                        <div id="pnl-toman" class="text-base sm:text-lg font-extrabold tabular-nums-fa mt-1">
-                            +۰ تومان
-                        </div>
+                        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">میزان سود / زیان (تومان)</span>
+                        <div id="pnl-toman" class="text-base sm:text-lg font-extrabold tabular-nums-fa mt-1">+۰ تومان</div>
                     </div>
 
-                    <!-- USD Profit/Loss -->
                     <div class="ios-glass rounded-2xl p-3.5 flex flex-col justify-between">
-                        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                            میزان سود / زیان (دلاری)
-                        </span>
-                        <div id="pnl-usd" dir="ltr" class="text-base sm:text-lg font-extrabold tabular-nums-fa mt-1 text-left">
-                            +$0.00
-                        </div>
+                        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">میزان سود / زیان (دلاری)</span>
+                        <div id="pnl-usd" dir="ltr" class="text-base sm:text-lg font-extrabold tabular-nums-fa mt-1 text-left">+$0.00</div>
                     </div>
                 </div>
 
-                <!-- Interactive Graphical Portfolio Chart -->
                 <div class="ios-glass rounded-2xl p-3.5 sm:p-4 relative">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                         <div class="flex items-center gap-2">
                             <span id="chart-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                            <span class="text-xs font-bold text-slate-700 dark:text-slate-200">
-                                نمودار روند ارزش پرتفولیو
-                            </span>
+                            <span class="text-xs font-bold text-slate-700 dark:text-slate-200">نمودار روند ارزش پرتفولیو</span>
                         </div>
-                        <div id="chart-hover-readout" class="text-xs font-extrabold tabular-nums-fa text-blue-600 dark:text-sky-400">
+                        <div id="chart-hover-readout" class="text-xs font-extrabold tabular-nums-fa text-purple-600 dark:text-purple-400">
                             برای مشاهده جزئیات، نمودار را لمس کنید
                         </div>
                     </div>
@@ -614,7 +568,6 @@
 
                     <div class="flex items-center justify-between text-[10px] font-semibold text-slate-400 dark:text-slate-500 mt-2 px-1">
                         <span id="chart-start-label">ابتدای دوره</span>
-                        <span id="chart-mid-label">میانه دوره</span>
                         <span>اکنون (لحظه‌ای)</span>
                     </div>
                 </div>
@@ -623,202 +576,129 @@
 
     </div>
 
-    <!-- iOS Floating Glass Bottom Dock -->
+    <!-- iOS Floating Glass Bottom Dock (With Equal Size Icons & Scroll Active Highlighting) -->
     <nav aria-label="ناوبری پایین صفحه" class="fixed bottom-3 inset-x-3 max-w-md mx-auto z-40">
-        <div class="ios-glass-hero rounded-3xl px-3 py-2 flex items-center justify-around shadow-2xl border border-white/30 dark:border-white/15">
-            <button onclick="scrollToSection('top')" class="ios-press flex flex-col items-center gap-1 py-1 px-3 rounded-2xl text-blue-600 dark:text-sky-400">
-                <i class="fa-solid fa-clock text-base"></i>
-                <span class="text-[10px] font-bold">ساعت و تقویم</span>
+        <div class="ios-glass rounded-3xl px-2 py-2 flex items-center justify-around shadow-2xl border border-white/30 dark:border-white/15 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl">
+            <button onclick="scrollToSection('section-clock')" id="nav-btn-clock" class="dock-nav-btn ios-press flex flex-col items-center justify-center w-16 h-12 rounded-2xl text-slate-500 dark:text-slate-400 transition-all">
+                <i class="fa-solid fa-clock text-lg mb-0.5"></i>
+                <span class="text-[9px] font-bold">ساعت</span>
             </button>
-            <button onclick="scrollToSection('section-markets')" class="ios-press flex flex-col items-center gap-1 py-1 px-3 rounded-2xl text-slate-600 dark:text-slate-300 hover:text-amber-500">
-                <i class="fa-solid fa-chart-line text-base"></i>
-                <span class="text-[10px] font-bold">نرخ بازار</span>
+            <button onclick="scrollToSection('section-markets')" id="nav-btn-markets" class="dock-nav-btn ios-press flex flex-col items-center justify-center w-16 h-12 rounded-2xl text-slate-500 dark:text-slate-400 transition-all">
+                <i class="fa-solid fa-chart-line text-lg mb-0.5"></i>
+                <span class="text-[9px] font-bold">بازار</span>
             </button>
-            <button onclick="openAssetModal()" class="ios-press -mt-5 w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white shadow-lg shadow-blue-500/40 flex items-center justify-center border-2 border-white/70 dark:border-slate-800">
-                <i class="fa-solid fa-plus text-lg"></i>
+            <button onclick="openAssetModal()" class="dock-nav-btn ios-press flex flex-col items-center justify-center w-16 h-12 rounded-2xl text-slate-500 dark:text-slate-400 transition-all bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/40">
+                <i class="fa-solid fa-plus text-lg mb-0.5"></i>
+                <span class="text-[9px] font-bold">افزودن</span>
             </button>
-            <button onclick="scrollToSection('section-assets')" class="ios-press flex flex-col items-center gap-1 py-1 px-3 rounded-2xl text-slate-600 dark:text-slate-300 hover:text-emerald-500">
-                <i class="fa-solid fa-wallet text-base"></i>
-                <span class="text-[10px] font-bold">دارایی من</span>
+            <button onclick="scrollToSection('section-assets')" id="nav-btn-assets" class="dock-nav-btn ios-press flex flex-col items-center justify-center w-16 h-12 rounded-2xl text-slate-500 dark:text-slate-400 transition-all">
+                <i class="fa-solid fa-wallet text-lg mb-0.5"></i>
+                <span class="text-[9px] font-bold">دارایی</span>
             </button>
-            <button onclick="scrollToSection('section-portfolio')" class="ios-press flex flex-col items-center gap-1 py-1 px-3 rounded-2xl text-slate-600 dark:text-slate-300 hover:text-purple-500">
-                <i class="fa-solid fa-chart-area text-base"></i>
-                <span class="text-[10px] font-bold">پرتفولیو</span>
+            <button onclick="scrollToSection('section-portfolio')" id="nav-btn-portfolio" class="dock-nav-btn ios-press flex flex-col items-center justify-center w-16 h-12 rounded-2xl text-slate-500 dark:text-slate-400 transition-all">
+                <i class="fa-solid fa-chart-area text-lg mb-0.5"></i>
+                <span class="text-[9px] font-bold">پرتفولیو</span>
             </button>
         </div>
     </nav>
 
     <!-- MODAL 1: CUSTOMIZE MARKET ITEMS -->
-    <div id="customize-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity">
-        <div class="ios-glass-hero w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-5 max-h-[85vh] flex flex-col shadow-2xl border-t border-white/25">
+    <div id="customize-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
+        <div class="ios-glass w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-5 max-h-[85vh] flex flex-col shadow-2xl border-t border-white/25">
             <div class="w-12 h-1.5 rounded-full bg-slate-400/40 mx-auto mb-3 sm:hidden"></div>
             
             <div class="flex items-center justify-between pb-3 border-b border-slate-300/40 dark:border-white/10">
                 <div>
-                    <h3 class="text-base font-extrabold text-slate-900 dark:text-white">
-                        شخصی‌سازی نرخ‌های صفحه اصلی
-                    </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">
-                        دارایی‌های دلخواه خود را برای نمایش در صفحه اصلی تیک بزنید
-                    </p>
+                    <h3 class="text-base font-extrabold text-slate-900 dark:text-white">شخصی‌سازی نرخ‌های صفحه اصلی</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">دارایی‌های دلخواه خود را تیک بزنید</p>
                 </div>
                 <button onclick="closeCustomizeModal()" class="w-9 h-9 rounded-full ios-glass flex items-center justify-center text-slate-500 hover:text-red-500">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Select All / Deselect Quick Bar -->
             <div class="flex items-center justify-between py-2.5 text-xs">
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleAllVisibility(true)" class="px-3 py-1.5 rounded-xl bg-blue-500/15 text-blue-600 dark:text-sky-400 font-bold">
-                        انتخاب همه (۱۸ مورد)
-                    </button>
-                    <button onclick="toggleAllVisibility(false)" class="px-3 py-1.5 rounded-xl bg-slate-500/15 text-slate-600 dark:text-slate-300 font-semibold">
-                        فقط موارد کلیدی
-                    </button>
+                    <button onclick="toggleAllVisibility(true)" class="px-3 py-1.5 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold">انتخاب همه</button>
+                    <button onclick="toggleAllVisibility(false)" class="px-3 py-1.5 rounded-xl bg-slate-500/15 text-slate-600 dark:text-slate-300 font-semibold">فقط کلیدی‌ها</button>
                 </div>
                 <span id="modal-selected-counter" class="font-bold text-amber-500 tabular-nums-fa"></span>
             </div>
 
-            <!-- Scrollable Checklist of All 18 Assets -->
-            <div id="customize-list" class="overflow-y-auto space-y-2 py-2 flex-1 pr-1">
-                <!-- Populated by JS -->
-            </div>
+            <div id="customize-list" class="overflow-y-auto space-y-2 py-2 flex-1 pr-1"></div>
 
             <div class="pt-3 border-t border-slate-300/40 dark:border-white/10 mt-2">
-                <button onclick="closeCustomizeModal()" class="w-full py-3 rounded-2xl bg-gradient-to-l from-blue-600 to-indigo-600 text-white font-extrabold text-sm shadow-lg shadow-blue-600/30">
-                    ذخیره و اعمال در صفحه اصلی
+                <button onclick="closeCustomizeModal()" class="w-full py-3 rounded-2xl bg-gradient-to-l from-amber-500 to-amber-600 text-white font-extrabold text-sm shadow-lg shadow-amber-600/30">
+                    ذخیره و اعمال
                 </button>
             </div>
         </div>
     </div>
 
     <!-- MODAL 2: ADD / EDIT USER ASSETS -->
-    <div id="asset-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 transition-opacity">
-        <div class="ios-glass-hero w-full max-w-xl rounded-t-3xl sm:rounded-3xl p-5 max-h-[88vh] flex flex-col shadow-2xl border-t border-white/25">
+    <div id="asset-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
+        <div class="ios-glass w-full max-w-xl rounded-t-3xl sm:rounded-3xl p-5 max-h-[88vh] flex flex-col shadow-2xl border-t border-white/25">
             <div class="w-12 h-1.5 rounded-full bg-slate-400/40 mx-auto mb-3 sm:hidden"></div>
 
             <div class="flex items-center justify-between pb-3 border-b border-slate-300/40 dark:border-white/10">
                 <div>
                     <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-coins text-amber-500"></i>
+                        <i class="fa-solid fa-coins text-emerald-500"></i>
                         <span>ثبت و ویرایش مقدار دارایی‌ها</span>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">
-                        مقدار هر دارایی (گرم، عدد، دلار یا واحد کریپتو) را وارد کنید
-                    </p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">مقدار هر دارایی را وارد کنید</p>
                 </div>
                 <button onclick="closeAssetModal()" class="w-9 h-9 rounded-full ios-glass flex items-center justify-center text-slate-500 hover:text-red-500">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Search Input inside Asset Modal -->
             <div class="my-3 relative">
                 <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                <input id="asset-search-input" oninput="renderAssetModalList()" type="text" placeholder="جستجوی دارایی (مثلاً: طلای ۱۸ عیار، دلار، بیت‌کوین...)" class="w-full pr-9 pl-3 py-2.5 rounded-2xl ios-glass text-xs sm:text-sm font-semibold text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input id="asset-search-input" oninput="renderAssetModalList()" type="text" placeholder="جستجوی دارایی..." class="w-full pr-9 pl-3 py-2.5 rounded-2xl ios-glass text-xs sm:text-sm font-semibold text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500">
             </div>
 
-            <!-- Scrollable List of All Assets with Quantity Inputs -->
-            <div id="asset-modal-inputs" class="overflow-y-auto space-y-2.5 py-1 flex-1 pr-1">
-                <!-- Populated dynamically via JS -->
-            </div>
+            <div id="asset-modal-inputs" class="overflow-y-auto space-y-2.5 py-1 flex-1 pr-1"></div>
 
             <div class="pt-3 border-t border-slate-300/40 dark:border-white/10 mt-2 flex items-center gap-2.5">
                 <button onclick="saveAllAssetInputs()" class="flex-1 py-3 rounded-2xl bg-gradient-to-l from-emerald-500 to-teal-600 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-check"></i>
                     <span>ثبت و محاسبه دارایی‌ها</span>
                 </button>
-                <button onclick="closeAssetModal()" class="px-5 py-3 rounded-2xl ios-glass text-xs font-bold text-slate-600 dark:text-slate-300">
-                    انصراف
-                </button>
+                <button onclick="closeAssetModal()" class="px-5 py-3 rounded-2xl ios-glass text-xs font-bold text-slate-600 dark:text-slate-300">انصراف</button>
             </div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: iOS ADD TO HOME SCREEN GUIDE -->
-    <div id="pwa-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4">
-        <div class="ios-glass-hero w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 space-y-4 shadow-2xl border-t border-white/25">
-            <div class="w-12 h-1.5 rounded-full bg-slate-400/40 mx-auto mb-1 sm:hidden"></div>
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-500">
-                        <i class="fa-brands fa-apple text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
-                            نصب نسخه بومی iOS (PWA)
-                        </h3>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">
-                            اجرای تمام‌صفحه بدون نوار آدرس سافاری
-                        </p>
-                    </div>
-                </div>
-                <button onclick="closePwaModal()" class="w-8 h-8 rounded-full ios-glass flex items-center justify-center text-slate-500">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="space-y-2.5 text-xs text-slate-700 dark:text-slate-200">
-                <div class="ios-glass rounded-2xl p-3 flex items-center gap-3">
-                    <span class="w-7 h-7 rounded-xl bg-blue-500 text-white font-black flex items-center justify-center shrink-0">۱</span>
-                    <p>در مرورگر <strong>Safari</strong> آیفون، روی دکمه <strong>Share</strong> <i class="fa-solid fa-arrow-up-from-bracket text-blue-500 mx-1"></i> در نوار پایین ضربه بزنید.</p>
-                </div>
-                <div class="ios-glass rounded-2xl p-3 flex items-center gap-3">
-                    <span class="w-7 h-7 rounded-xl bg-blue-500 text-white font-black flex items-center justify-center shrink-0">۲</span>
-                    <p>در منوی باز شده، گزینه <strong>Add to Home Screen</strong> <i class="fa-regular fa-square-plus text-emerald-500 mx-1"></i> را انتخاب کنید.</p>
-                </div>
-                <div class="ios-glass rounded-2xl p-3 flex items-center gap-3">
-                    <span class="w-7 h-7 rounded-xl bg-blue-500 text-white font-black flex items-center justify-center shrink-0">۳</span>
-                    <p>دکمه <strong>Add</strong> در بالا سمت راست را بزنید تا آیکون <strong>اسکناس</strong> به صفحه اصلی آیفون اضافه شود.</p>
-                </div>
-            </div>
-
-            <button onclick="closePwaModal()" class="w-full py-2.5 rounded-2xl bg-blue-600 text-white font-extrabold text-xs">
-                متوجه شدم
-            </button>
         </div>
     </div>
 
     <!-- Toast Notification Container -->
     <div id="toast-box" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 -translate-y-3 transition-all duration-300">
-        <div class="ios-glass-hero px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-extrabold text-slate-900 dark:text-white border border-emerald-500/30">
+        <div class="ios-glass px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-extrabold text-slate-900 dark:text-white border border-emerald-500/30">
             <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
             <span id="toast-message">عملیات با موفقیت انجام شد</span>
         </div>
     </div>
 
     <script>
-        /* ============================================================================
-         * 1.PERSIAN DIGIT & CURRENCY FORMATTING UTILITIES
-         * ============================================================================ */
         const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-
         function toPersianDigits(val) {
             if (val === null || val === undefined) return '';
             return String(val).replace(/\d/g, d => persianDigits[Number(d)]);
         }
-
         function formatToman(num) {
             if (isNaN(num)) return '۰';
-            const rounded = Math.round(num);
-            return toPersianDigits(rounded.toLocaleString('en-US'));
+            return toPersianDigits(Math.round(num).toLocaleString('en-US'));
         }
-
         function formatQuantity(num) {
             if (!num || isNaN(num)) return '۰';
             return toPersianDigits(Number(num).toLocaleString('en-US', { maximumFractionDigits: 4 }));
         }
-
         function formatUSD(num) {
             if (isNaN(num)) return '0.00';
             return Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
-
         function showToast(msg) {
             const box = document.getElementById('toast-box');
-            const label = document.getElementById('toast-message');
-            label.textContent = msg;
+            document.getElementById('toast-message').textContent = msg;
             box.classList.remove('opacity-0', '-translate-y-3');
             box.classList.add('opacity-100', 'translate-y-0');
             setTimeout(() => {
@@ -827,296 +707,47 @@
             }, 2600);
         }
 
-        /* ============================================================================
-         * 2. COMPLETE LIST OF 18 MARKET ASSETS (CONNECTED TO TGJU.ORG SLUGS)
-         *    Updated with latest real-time TGJU.org market baselines (مهر ۱۴۰۵ / Oct 2026)
-         * ============================================================================ */
         const INITIAL_MARKET_ASSETS = [
-            // طلا و سکه (Gold & Coins - TGJU Live Rates in Toman)
-            {
-                id: 'geram18',
-                tgjuSlug: 'geram18',
-                name: 'طلای ۱۸ عیار (گرمی)',
-                category: 'gold',
-                unit: 'گرم',
-                icon: 'fa-solid fa-ring',
-                iconColor: 'text-amber-500',
-                priceToman: 25937200,
-                change24h: -1.70,
-                visible: true,
-                annualGrowthRate: 0.88
-            },
-            {
-                id: 'geram24',
-                tgjuSlug: 'geram24',
-                name: 'طلای ۲۴ عیار (گرمی)',
-                category: 'gold',
-                unit: 'گرم',
-                icon: 'fa-solid fa-crown',
-                iconColor: 'text-amber-400',
-                priceToman: 34538000,
-                change24h: -1.68,
-                visible: true,
-                annualGrowthRate: 0.89
-            },
-            {
-                id: 'mesghal',
-                tgjuSlug: 'mesghal',
-                name: 'مثقال طلا',
-                category: 'gold',
-                unit: 'مثقال',
-                icon: 'fa-solid fa-scale-balanced',
-                iconColor: 'text-yellow-500',
-                priceToman: 112350000,
-                change24h: -1.44,
-                visible: true,
-                annualGrowthRate: 0.88
-            },
-            {
-                id: 'sekee',
-                tgjuSlug: 'sekee',
-                name: 'سکه امامی',
-                category: 'gold',
-                unit: 'عدد',
-                icon: 'fa-solid fa-coins',
-                iconColor: 'text-amber-500',
-                priceToman: 264190000,
-                change24h: -2.25,
-                visible: true,
-                annualGrowthRate: 0.92
-            },
-            {
-                id: 'sekeb',
-                tgjuSlug: 'sekeb',
-                name: 'سکه بهار آزادی',
-                category: 'gold',
-                unit: 'عدد',
-                icon: 'fa-solid fa-circle-dot',
-                iconColor: 'text-amber-400',
-                priceToman: 254655000,
-                change24h: -1.14,
-                visible: true,
-                annualGrowthRate: 0.89
-            },
-            {
-                id: 'nim',
-                tgjuSlug: 'nim',
-                name: 'نیم سکه',
-                category: 'gold',
-                unit: 'عدد',
-                icon: 'fa-solid fa-coins',
-                iconColor: 'text-yellow-500',
-                priceToman: 138980000,
-                change24h: -0.71,
-                visible: true,
-                annualGrowthRate: 0.85
-            },
-            {
-                id: 'rob',
-                tgjuSlug: 'rob',
-                name: 'ربع سکه',
-                category: 'gold',
-                unit: 'عدد',
-                icon: 'fa-solid fa-coins',
-                iconColor: 'text-amber-600',
-                priceToman: 73710000,
-                change24h: -1.38,
-                visible: true,
-                annualGrowthRate: 0.82
-            },
-
-            // فلزات (Metals)
-            {
-                id: 'silver',
-                tgjuSlug: 'silver_999',
-                name: 'نقره (گرمی ۹۹۹)',
-                category: 'metals',
-                unit: 'گرم',
-                icon: 'fa-solid fa-gem',
-                iconColor: 'text-slate-400',
-                priceToman: 529030,
-                change24h: 1.42,
-                visible: true,
-                annualGrowthRate: 0.95
-            },
-
-            // ارزها (Currencies - TGJU Free Market Rates in Toman)
-            {
-                id: 'usd',
-                tgjuSlug: 'price_dollar_rl',
-                name: 'دلار آمریکا',
-                category: 'currency',
-                unit: 'دلار',
-                icon: 'fa-solid fa-dollar-sign',
-                iconColor: 'text-emerald-500',
-                priceToman: 260800,
-                change24h: -1.15,
-                visible: true,
-                annualGrowthRate: 0.74
-            },
-            {
-                id: 'cad',
-                tgjuSlug: 'price_cad',
-                name: 'دلار کانادا',
-                category: 'currency',
-                unit: 'دلار کانادا',
-                icon: 'fa-brands fa-canadian-maple-leaf',
-                iconColor: 'text-red-500',
-                priceToman: 184810,
-                change24h: -0.95,
-                visible: true,
-                annualGrowthRate: 0.71
-            },
-            {
-                id: 'eur',
-                tgjuSlug: 'price_eur',
-                name: 'یورو اروپا',
-                category: 'currency',
-                unit: 'یورو',
-                icon: 'fa-solid fa-euro-sign',
-                iconColor: 'text-blue-500',
-                priceToman: 293410,
-                change24h: -1.07,
-                visible: true,
-                annualGrowthRate: 0.75
-            },
-            {
-                id: 'cny',
-                tgjuSlug: 'price_cny',
-                name: 'یوان چین',
-                category: 'currency',
-                unit: 'یوان',
-                icon: 'fa-solid fa-yen-sign',
-                iconColor: 'text-rose-500',
-                priceToman: 39180,
-                change24h: -0.84,
-                visible: true,
-                annualGrowthRate: 0.70
-            },
-            {
-                id: 'afn',
-                tgjuSlug: 'price_afn',
-                name: 'افغانی افغانستان',
-                category: 'currency',
-                unit: 'افغانی',
-                icon: 'fa-solid fa-money-bill-transfer',
-                iconColor: 'text-teal-500',
-                priceToman: 4024,
-                change24h: -0.65,
-                visible: true,
-                annualGrowthRate: 0.68
-            },
-            {
-                id: 'aed',
-                tgjuSlug: 'price_aed',
-                name: 'درهم امارات',
-                category: 'currency',
-                unit: 'درهم',
-                icon: 'fa-solid fa-landmark',
-                iconColor: 'text-emerald-400',
-                priceToman: 71500,
-                change24h: -1.02,
-                visible: true,
-                annualGrowthRate: 0.74
-            },
-            {
-                id: 'try',
-                tgjuSlug: 'price_try',
-                name: 'لیر ترکیه',
-                category: 'currency',
-                unit: 'لیر',
-                icon: 'fa-solid fa-turkish-lira-sign',
-                iconColor: 'text-red-400',
-                priceToman: 5280,
-                change24h: -1.12,
-                visible: true,
-                annualGrowthRate: 0.45
-            },
-            {
-                id: 'iqd',
-                tgjuSlug: 'price_iqd',
-                name: 'دینار عراق (۱۰۰ دینار)',
-                category: 'currency',
-                unit: 'صد دینار',
-                icon: 'fa-solid fa-money-bill-1-wave',
-                iconColor: 'text-cyan-500',
-                priceToman: 17160,
-                change24h: -0.58,
-                visible: true,
-                annualGrowthRate: 0.69
-            },
-
-            // ارزهای دیجیتال (Cryptocurrencies)
-            {
-                id: 'btc',
-                tgjuSlug: 'crypto-bitcoin',
-                name: 'بیت‌کوین (BTC)',
-                category: 'crypto',
-                unit: 'BTC',
-                icon: 'fa-brands fa-bitcoin',
-                iconColor: 'text-orange-500',
-                priceUSD: 82627,
-                priceToman: Math.round(82627 * 260800),
-                change24h: 0.51,
-                visible: true,
-                annualGrowthRate: 0.96
-            },
-            {
-                id: 'eth',
-                tgjuSlug: 'crypto-ethereum',
-                name: 'اتریوم (ETH)',
-                category: 'crypto',
-                unit: 'ETH',
-                icon: 'fa-brands fa-ethereum',
-                iconColor: 'text-indigo-400',
-                priceUSD: 2410.51,
-                priceToman: Math.round(2410.51 * 260800),
-                change24h: -2.01,
-                visible: true,
-                annualGrowthRate: 0.78
-            }
+            { id: 'geram18', tgjuSlug: 'geram18', name: 'طلای ۱۸ عیار (گرمی)', category: 'gold', unit: 'گرم', icon: 'fa-solid fa-ring', iconColor: 'text-amber-500', priceToman: 25937200, change24h: -1.70, visible: true, annualGrowthRate: 0.88 },
+            { id: 'geram24', tgjuSlug: 'geram24', name: 'طلای ۲۴ عیار (گرمی)', category: 'gold', unit: 'گرم', icon: 'fa-solid fa-crown', iconColor: 'text-amber-400', priceToman: 34538000, change24h: -1.68, visible: true, annualGrowthRate: 0.89 },
+            { id: 'mesghal', tgjuSlug: 'mesghal', name: 'مثقال طلا', category: 'gold', unit: 'مثقال', icon: 'fa-solid fa-scale-balanced', iconColor: 'text-yellow-500', priceToman: 112350000, change24h: -1.44, visible: true, annualGrowthRate: 0.88 },
+            { id: 'sekee', tgjuSlug: 'sekee', name: 'سکه امامی', category: 'gold', unit: 'عدد', icon: 'fa-solid fa-coins', iconColor: 'text-amber-500', priceToman: 264190000, change24h: -2.25, visible: true, annualGrowthRate: 0.92 },
+            { id: 'sekeb', tgjuSlug: 'sekeb', name: 'سکه بهار آزادی', category: 'gold', unit: 'عدد', icon: 'fa-solid fa-circle-dot', iconColor: 'text-amber-400', priceToman: 254655000, change24h: -1.14, visible: true, annualGrowthRate: 0.89 },
+            { id: 'nim', tgjuSlug: 'nim', name: 'نیم سکه', category: 'gold', unit: 'عدد', icon: 'fa-solid fa-coins', iconColor: 'text-yellow-500', priceToman: 138980000, change24h: -0.71, visible: true, annualGrowthRate: 0.85 },
+            { id: 'rob', tgjuSlug: 'rob', name: 'ربع سکه', category: 'gold', unit: 'عدد', icon: 'fa-solid fa-coins', iconColor: 'text-amber-600', priceToman: 73710000, change24h: -1.38, visible: true, annualGrowthRate: 0.82 },
+            { id: 'silver', tgjuSlug: 'silver_999', name: 'نقره (گرمی ۹۹۹)', category: 'metals', unit: 'گرم', icon: 'fa-solid fa-gem', iconColor: 'text-slate-400', priceToman: 529030, change24h: 1.42, visible: true, annualGrowthRate: 0.95 },
+            { id: 'usd', tgjuSlug: 'price_dollar_rl', name: 'دلار آمریکا', category: 'currency', unit: 'دلار', icon: 'fa-solid fa-dollar-sign', iconColor: 'text-emerald-500', priceToman: 260800, change24h: -1.15, visible: true, annualGrowthRate: 0.74 },
+            { id: 'cad', tgjuSlug: 'price_cad', name: 'دلار کانادا', category: 'currency', unit: 'دلار کانادا', icon: 'fa-brands fa-canadian-maple-leaf', iconColor: 'text-red-500', priceToman: 184810, change24h: -0.95, visible: true, annualGrowthRate: 0.71 },
+            { id: 'eur', tgjuSlug: 'price_eur', name: 'یورو اروپا', category: 'currency', unit: 'یورو', icon: 'fa-solid fa-euro-sign', iconColor: 'text-blue-500', priceToman: 293410, change24h: -1.07, visible: true, annualGrowthRate: 0.75 },
+            { id: 'cny', tgjuSlug: 'price_cny', name: 'یوان چین', category: 'currency', unit: 'یوان', icon: 'fa-solid fa-yen-sign', iconColor: 'text-rose-500', priceToman: 39180, change24h: -0.84, visible: true, annualGrowthRate: 0.70 },
+            { id: 'afn', tgjuSlug: 'price_afn', name: 'افغانی افغانستان', category: 'currency', unit: 'افغانی', icon: 'fa-solid fa-money-bill-transfer', iconColor: 'text-teal-500', priceToman: 4024, change24h: -0.65, visible: true, annualGrowthRate: 0.68 },
+            { id: 'aed', tgjuSlug: 'price_aed', name: 'درهم امارات', category: 'currency', unit: 'درهم', icon: 'fa-solid fa-landmark', iconColor: 'text-emerald-400', priceToman: 71500, change24h: -1.02, visible: true, annualGrowthRate: 0.74 },
+            { id: 'try', tgjuSlug: 'price_try', name: 'لیر ترکیه', category: 'currency', unit: 'لیر', icon: 'fa-solid fa-turkish-lira-sign', iconColor: 'text-red-400', priceToman: 5280, change24h: -1.12, visible: true, annualGrowthRate: 0.45 },
+            { id: 'iqd', tgjuSlug: 'price_iqd', name: 'دینار عراق (۱۰۰ دینار)', category: 'currency', unit: 'صد دینار', icon: 'fa-solid fa-money-bill-1-wave', iconColor: 'text-cyan-500', priceToman: 17160, change24h: -0.58, visible: true, annualGrowthRate: 0.69 },
+            { id: 'btc', tgjuSlug: 'crypto-bitcoin', name: 'بیت‌کوین (BTC)', category: 'crypto', unit: 'BTC', icon: 'fa-brands fa-bitcoin', iconColor: 'text-orange-500', priceUSD: 82627, priceToman: Math.round(82627 * 260800), change24h: 0.51, visible: true, annualGrowthRate: 0.96 },
+            { id: 'eth', tgjuSlug: 'crypto-ethereum', name: 'اتریوم (ETH)', category: 'crypto', unit: 'ETH', icon: 'fa-brands fa-ethereum', iconColor: 'text-indigo-400', priceUSD: 2410.51, priceToman: Math.round(2410.51 * 260800), change24h: -2.01, visible: true, annualGrowthRate: 0.78 }
         ];
 
-        /* ============================================================================
-         * 3. STATE MANAGEMENT
-         * ============================================================================ */
         let marketAssets = JSON.parse(JSON.stringify(INITIAL_MARKET_ASSETS));
         let activeCategory = 'all';
         let activePortfolioPeriod = '1M';
+        let userHoldings = { geram18: 12.5, sekee: 2, usd: 1500, btc: 0.045 };
 
-        // Default realistic portfolio so the user immediately sees the calculations & chart in action
-        let userHoldings = {
-            geram18: 12.5,
-            sekee: 2,
-            usd: 1500,
-            btc: 0.045
-        };
-
-        // Browser storage persistence wrapper with safe fallback
-        const STORAGE_KEY_HOLDINGS = 'servatban_ios_holdings_v1';
-        const STORAGE_KEY_VISIBILITY = 'servatban_ios_visibility_v1';
-        const STORAGE_KEY_THEME = 'servatban_ios_theme_v1';
+        const STORAGE_KEY_HOLDINGS = 'servatban_ios_holdings_v2';
+        const STORAGE_KEY_VISIBILITY = 'servatban_ios_visibility_v2';
+        const STORAGE_KEY_THEME = 'servatban_ios_theme_v2';
 
         function loadPersistedState() {
             try {
                 const storage = window['local' + 'Storage'];
                 if (!storage) return;
-
                 const savedHoldings = storage.getItem(STORAGE_KEY_HOLDINGS);
-                if (savedHoldings) {
-                    userHoldings = JSON.parse(savedHoldings);
-                }
-
+                if (savedHoldings) userHoldings = JSON.parse(savedHoldings);
                 const savedVis = storage.getItem(STORAGE_KEY_VISIBILITY);
                 if (savedVis) {
                     const visMap = JSON.parse(savedVis);
-                    marketAssets.forEach(a => {
-                        if (typeof visMap[a.id] === 'boolean') {
-                            a.visible = visMap[a.id];
-                        }
-                    });
+                    marketAssets.forEach(a => { if (typeof visMap[a.id] === 'boolean') a.visible = visMap[a.id]; });
                 }
-
                 const savedTheme = storage.getItem(STORAGE_KEY_THEME);
                 if (savedTheme === 'light') {
                     document.documentElement.classList.remove('dark');
@@ -1125,29 +756,20 @@
                     document.documentElement.classList.add('dark');
                     updateThemeUI(true);
                 }
-            } catch (err) {
-                console.warn('State persistence fallback active:', err);
-            }
+            } catch (err) {}
         }
 
         function savePersistedState() {
             try {
                 const storage = window['local' + 'Storage'];
                 if (!storage) return;
-
                 storage.setItem(STORAGE_KEY_HOLDINGS, JSON.stringify(userHoldings));
                 const visMap = {};
                 marketAssets.forEach(a => { visMap[a.id] = a.visible; });
                 storage.setItem(STORAGE_KEY_VISIBILITY, JSON.stringify(visMap));
-            } catch (err) {
-                console.warn('Unable to persist state:', err);
-            }
+            } catch (err) {}
         }
 
-        /* */
-        /* ============================================================================
-         * 4. DARK MODE / LIGHT MODE CONTROLLER
-         * ============================================================================ */
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             updateThemeUI(isDark);
@@ -1170,40 +792,25 @@
             }
         }
 
-        /* ============================================================================
-         * 5. LIVE CLOCK & DUAL CALENDAR (TEHRAN TIME.IR ENGINE)
-         * ============================================================================ */
         function updateLiveClockAndCalendar() {
             const now = new Date();
-
-            // 1. Live Tehran Time (HH:MM:SS)
-            const timeParts = new Intl.DateTimeFormat('en-US', {
-                timeZone: 'Asia/Tehran',
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            }).formatToParts(now);
-
+            const timeParts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tehran', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(now);
             let h = '00', m = '00', s = '00';
             timeParts.forEach(p => {
                 if (p.type === 'hour') h = p.value === '24' ? '00' : p.value;
                 if (p.type === 'minute') m = p.value;
                 if (p.type === 'second') s = p.value;
             });
-
             document.getElementById('live-time-hm').textContent = toPersianDigits(`${h}:${m}`);
             document.getElementById('live-time-sec').textContent = toPersianDigits(`:${s}`);
             document.getElementById('live-seconds-badge').textContent = toPersianDigits(s);
 
-            // Update circular progress ring for seconds
             const secNum = parseInt(s, 10) || 0;
             const circumference = 175.9;
             const offset = circumference - (secNum / 60) * circumference;
             const ring = document.getElementById('clock-ring');
             if (ring) ring.style.strokeDashoffset = offset;
 
-            // Day / Night greeting indicator
             const hourNum = parseInt(h, 10);
             const dayNightEl = document.getElementById('day-night-label');
             if (hourNum >= 6 && hourNum < 18) {
@@ -1212,63 +819,22 @@
                 dayNightEl.innerHTML = '<i class="fa-solid fa-moon text-indigo-400 ml-1"></i>شب تهران';
             }
 
-            // 2. Solar Hijri (Jalali / شمسی) Date aligned with time.ir
-            const jalaliLong = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
-                timeZone: 'Asia/Tehran',
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            }).format(now);
-
-            const jalaliNumeric = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
-                timeZone: 'Asia/Tehran',
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit'
-            }).format(now);
-
+            const jalaliLong = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { timeZone: 'Asia/Tehran', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+            const jalaliNumeric = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { timeZone: 'Asia/Tehran', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
             document.getElementById('jalali-text').textContent = jalaliLong;
             document.getElementById('jalali-numeric').textContent = jalaliNumeric;
 
-            // 3. Gregorian (میلادی) Date
-            const gregLong = new Intl.DateTimeFormat('en-US', {
-                timeZone: 'Asia/Tehran',
-                weekday: 'short',
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-            }).format(now);
-
-            const gregNumeric = new Intl.DateTimeFormat('en-CA', {
-                timeZone: 'Asia/Tehran',
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit'
-            }).format(now).replace(/-/g, '/');
-
+            const gregLong = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tehran', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(now);
+            const gregNumeric = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tehran', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now).replace(/-/g, '/');
             document.getElementById('gregorian-text').textContent = gregLong;
             document.getElementById('gregorian-numeric').textContent = gregNumeric;
         }
 
-        /* */
-        /* ============================================================================
-         * 6. MULTI-LAYER LIVE MARKET ENGINE (TGJU PROXIES + LIVE CRYPTO & IRT FEEDS)
-         * ============================================================================ */
         function updateLastSyncTimestamp(sourceLabel = 'TGJU.org') {
             const now = new Date();
-            const timeStr = new Intl.DateTimeFormat('fa-IR', {
-                timeZone: 'Asia/Tehran',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).format(now);
-
+            const timeStr = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
             const syncEl = document.getElementById('last-sync-text');
-            if (syncEl) {
-                syncEl.textContent = `آخرین بروزرسانی زنده (${sourceLabel}): ساعت ${timeStr} • قیمت‌ها به تومان`;
-            }
+            if (syncEl) syncEl.textContent = `بروزرسانی زنده (${sourceLabel}): ساعت ${timeStr} • قیمت‌ها به تومان`;
         }
 
         async function fetchWithTimeout(url, timeoutMs = 4000) {
@@ -1284,129 +850,65 @@
             }
         }
 
-        // Layer A: Fetch live TGJU JSON feed via multiple fallback CORS proxies
         async function fetchTgjuViaProxies() {
             const targetUrl = 'https://call1.tgju.org/ajax.json?_=' + Date.now();
             const proxyEndpoints = [
-                {
-                    url: 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl),
-                    parse: async (res) => await res.json()
-                },
-                {
-                    url: 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl),
-                    parse: async (res) => await res.json()
-                },
-                {
-                    url: 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl),
-                    parse: async (res) => {
-                        const w = await res.json();
-                        return w && w.contents ? JSON.parse(w.contents) : null;
-                    }
-                }
+                'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl),
+                'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl)
             ];
-
-            for (const proxy of proxyEndpoints) {
+            for (const url of proxyEndpoints) {
                 try {
-                    const res = await fetchWithTimeout(proxy.url, 3800);
+                    const res = await fetchWithTimeout(url, 3500);
                     if (res.ok) {
-                        const data = await proxy.parse(res);
-                        if (data && data.current) {
-                            return data.current;
-                        }
+                        const data = await res.json();
+                        if (data && data.current) return data.current;
                     }
-                } catch (_) {
-                    // Try next proxy
-                }
+                } catch (_) {}
             }
             return null;
         }
 
-        // Layer B: Fetch live Global Crypto (BTC & ETH) USD prices & 24h changes directly
         async function fetchLiveCryptoUSD() {
             try {
-                const res = await fetchWithTimeout(
-                    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',
-                    3500
-                );
+                const res = await fetchWithTimeout('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true', 3000);
                 if (res.ok) {
                     const data = await res.json();
                     const result = {};
-                    if (data.bitcoin && data.bitcoin.usd) {
-                        result.btc = {
-                            usd: Number(data.bitcoin.usd),
-                            change: Number(data.bitcoin.usd_24h_change || 0)
-                        };
-                    }
-                    if (data.ethereum && data.ethereum.usd) {
-                        result.eth = {
-                            usd: Number(data.ethereum.usd),
-                            change: Number(data.ethereum.usd_24h_change || 0)
-                        };
-                    }
-                    if (result.btc || result.eth) return result;
+                    if (data.bitcoin) result.btc = { usd: Number(data.bitcoin.usd), change: Number(data.bitcoin.usd_24h_change || 0) };
+                    if (data.ethereum) result.eth = { usd: Number(data.ethereum.usd), change: Number(data.ethereum.usd_24h_change || 0) };
+                    return result;
                 }
             } catch (_) {}
-
-            // Fallback to Binance public ticker API
-            try {
-                const res = await fetchWithTimeout(
-                    'https://api.binance.com/api/v3/ticker/24hr?symbols=%5B%22BTCUSDT%22,%22ETHUSDT%22%5D',
-                    3500
-                );
-                if (res.ok) {
-                    const arr = await res.json();
-                    const result = {};
-                    arr.forEach(item => {
-                        if (item.symbol === 'BTCUSDT') {
-                            result.btc = { usd: parseFloat(item.lastPrice), change: parseFloat(item.priceChangePercent) };
-                        }
-                        if (item.symbol === 'ETHUSDT') {
-                            result.eth = { usd: parseFloat(item.lastPrice), change: parseFloat(item.priceChangePercent) };
-                        }
-                    });
-                    if (result.btc || result.eth) return result;
-                }
-            } catch (_) {}
-
             return null;
         }
 
         async function triggerMarketSync(isManual = false) {
             const refreshIcon = document.getElementById('refresh-icon');
             if (refreshIcon) refreshIcon.classList.add('fa-spin');
-
-            let updatedFromNetwork = false;
-
+            let updated = false;
             try {
-                const [tgjuCurrent, cryptoLive] = await Promise.all([
-                    fetchTgjuViaProxies(),
-                    fetchLiveCryptoUSD()
-                ]);
-
+                const [tgjuCurrent, cryptoLive] = await Promise.all([fetchTgjuViaProxies(), fetchLiveCryptoUSD()]);
                 if (tgjuCurrent) {
                     applyTgjuLivePayload(tgjuCurrent);
-                    updatedFromNetwork = true;
+                    updated = true;
                 }
-
                 if (cryptoLive) {
                     const usdRate = getLiveUsdRate();
-                    const btcAsset = marketAssets.find(a => a.id === 'btc');
-                    const ethAsset = marketAssets.find(a => a.id === 'eth');
-
-                    if (btcAsset && cryptoLive.btc) {
-                        btcAsset.priceUSD = cryptoLive.btc.usd;
-                        btcAsset.priceToman = Math.round(cryptoLive.btc.usd * usdRate);
-                        btcAsset.change24h = +cryptoLive.btc.change.toFixed(2);
+                    const btc = marketAssets.find(a => a.id === 'btc');
+                    const eth = marketAssets.find(a => a.id === 'eth');
+                    if (btc && cryptoLive.btc) {
+                        btc.priceUSD = cryptoLive.btc.usd;
+                        btc.priceToman = Math.round(cryptoLive.btc.usd * usdRate);
+                        btc.change24h = +cryptoLive.btc.change.toFixed(2);
                     }
-                    if (ethAsset && cryptoLive.eth) {
-                        ethAsset.priceUSD = cryptoLive.eth.usd;
-                        ethAsset.priceToman = Math.round(cryptoLive.eth.usd * usdRate);
-                        ethAsset.change24h = +cryptoLive.eth.change.toFixed(2);
+                    if (eth && cryptoLive.eth) {
+                        eth.priceUSD = cryptoLive.eth.usd;
+                        eth.priceToman = Math.round(cryptoLive.eth.usd * usdRate);
+                        eth.change24h = +cryptoLive.eth.change.toFixed(2);
                     }
-                    updatedFromNetwork = true;
+                    updated = true;
                 }
-
-                if (updatedFromNetwork) {
+                if (updated) {
                     updateLastSyncTimestamp('TGJU.org');
                     renderMarketGrid();
                     renderUserAssets();
@@ -1419,35 +921,24 @@
                 simulateLiveMarketTick();
                 updateLastSyncTimestamp('نرخ روز بازار تهران');
             } finally {
-                setTimeout(() => {
-                    if (refreshIcon) refreshIcon.classList.remove('fa-spin');
-                }, 500);
-                if (isManual) {
-                    showToast('نرخ‌های لحظه‌ای اسکناس بروزرسانی شد');
-                }
+                setTimeout(() => { if (refreshIcon) refreshIcon.classList.remove('fa-spin'); }, 500);
+                if (isManual) showToast('نرخ‌های لحظه‌ای بازار بروزرسانی شد');
             }
         }
 
         function applyTgjuLivePayload(currentMap) {
             const changedIds = [];
             const usdAsset = marketAssets.find(a => a.id === 'usd');
-
             marketAssets.forEach(asset => {
                 const entry = currentMap[asset.tgjuSlug];
                 if (entry && entry.p) {
                     const oldPrice = asset.priceToman;
-                    // TGJU prices are in Rials; convert to Tomans (divide by 10)
                     const rawNum = parseFloat(String(entry.p).replace(/,/g, ''));
                     if (!isNaN(rawNum) && rawNum > 0) {
                         if (asset.category === 'crypto') {
-                            // For crypto-bitcoin / crypto-ethereum TGJU may return USD or Rial
-                            if (rawNum < 1000000) {
-                                asset.priceUSD = rawNum;
-                            } else {
-                                asset.priceToman = Math.round(rawNum / 10);
-                            }
+                            if (rawNum < 1000000) asset.priceUSD = rawNum;
+                            else asset.priceToman = Math.round(rawNum / 10);
                         } else if (asset.id === 'iqd' && rawNum < 10000) {
-                            // Normalize 1 IQD in Rials to 100 IQD in Tomans
                             asset.priceToman = Math.round((rawNum * 100) / 10);
                         } else {
                             asset.priceToman = Math.round(rawNum / 10);
@@ -1455,27 +946,19 @@
                     }
                     if (entry.dp !== undefined) {
                         const dp = parseFloat(entry.dp);
-                        if (!isNaN(dp)) {
-                            asset.change24h = entry.dt === 'low' ? -Math.abs(dp) : Math.abs(dp);
-                        }
+                        if (!isNaN(dp)) asset.change24h = entry.dt === 'low' ? -Math.abs(dp) : Math.abs(dp);
                     }
                     if (asset.priceToman !== oldPrice) {
-                        changedIds.push({
-                            id: asset.id,
-                            dir: asset.priceToman > oldPrice ? 'up' : 'down'
-                        });
+                        changedIds.push({ id: asset.id, dir: asset.priceToman > oldPrice ? 'up' : 'down' });
                     }
                 }
             });
-
-            // Sync Crypto Toman prices with live USD rate
             const liveUsd = usdAsset ? usdAsset.priceToman : 260800;
             marketAssets.forEach(asset => {
                 if (asset.category === 'crypto' && asset.priceUSD) {
                     asset.priceToman = Math.round(asset.priceUSD * liveUsd);
                 }
             });
-
             renderMarketGrid(changedIds);
             renderUserAssets();
             renderPortfolioAnalysis();
@@ -1484,48 +967,32 @@
         function simulateLiveMarketTick() {
             const changedIds = [];
             const usdAsset = marketAssets.find(a => a.id === 'usd');
-
             marketAssets.forEach(asset => {
-                // Realistic small micro-tick around the real TGJU market baseline
                 const deltaPct = (Math.random() - 0.495) * 0.0018;
                 const oldPrice = asset.priceToman;
-
                 if (asset.category === 'crypto') {
                     asset.priceUSD = Math.max(10, +(asset.priceUSD * (1 + deltaPct)).toFixed(2));
                     const usdRate = usdAsset ? usdAsset.priceToman : 260800;
                     asset.priceToman = Math.round(asset.priceUSD * usdRate);
                 } else {
-                    const step = asset.priceToman > 50000000 ? 10000 : (asset.priceToman > 1000000 ? 1000 : (asset.priceToman > 10000 ? 50 : 5));
-                    const nextRaw = asset.priceToman * (1 + deltaPct);
-                    asset.priceToman = Math.max(step, Math.round(nextRaw / step) * step);
+                    const step = asset.priceToman > 50000000 ? 10000 : (asset.priceToman > 1000000 ? 1000 : 50);
+                    asset.priceToman = Math.max(step, Math.round((asset.priceToman * (1 + deltaPct)) / step) * step);
                 }
-
-                // Slightly nudge 24h percentage
-                const nudge = (Math.random() - 0.5) * 0.04;
-                asset.change24h = +(asset.change24h + nudge).toFixed(2);
-
+                asset.change24h = +(asset.change24h + (Math.random() - 0.5) * 0.04).toFixed(2);
                 if (asset.priceToman !== oldPrice) {
-                    changedIds.push({
-                        id: asset.id,
-                        dir: asset.priceToman > oldPrice ? 'up' : 'down'
-                    });
+                    changedIds.push({ id: asset.id, dir: asset.priceToman > oldPrice ? 'up' : 'down' });
                 }
             });
-
             renderMarketGrid(changedIds);
             renderUserAssets();
             renderPortfolioAnalysis();
         }
 
-        /* */
-        /* ============================================================================
-         * 7. MARKET GRID RENDERING & HOME CUSTOMIZATION
-         * ============================================================================ */
         function setMarketCategory(cat) {
             activeCategory = cat;
             document.querySelectorAll('.market-cat-btn').forEach(btn => {
                 if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = 'market-cat-btn ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-bold transition-all bg-blue-600 text-white shadow-md shadow-blue-500/25 flex items-center gap-1.5';
+                    btn.className = 'market-cat-btn ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-bold transition-all bg-amber-600 text-white shadow-md shadow-amber-500/25 flex items-center gap-1.5';
                 } else {
                     btn.className = 'market-cat-btn ios-glass ios-press shrink-0 px-3.5 py-1.5 rounded-2xl text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5';
                 }
@@ -1535,21 +1002,14 @@
 
         function generateMiniSparkline(isPositive) {
             const color = isPositive ? '#30D158' : '#FF453A';
-            const points = isPositive
-                ? '2,20 14,17 26,19 38,12 50,14 62,6 74,3'
-                : '2,4 14,8 26,6 38,13 50,12 62,18 74,21';
-            return `
-                <svg class="w-16 h-6 overflow-visible" viewBox="0 0 76 24">
-                    <polyline fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="${points}" />
-                </svg>
-            `;
+            const points = isPositive ? '2,20 14,17 26,19 38,12 50,14 62,6 74,3' : '2,4 14,8 26,6 38,13 50,12 62,18 74,21';
+            return `<svg class="w-16 h-6 overflow-visible" viewBox="0 0 76 24"><polyline fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="${points}" /></svg>`;
         }
 
         function renderMarketGrid(changedItems = []) {
             const grid = document.getElementById('market-grid');
             const selectedCount = marketAssets.filter(a => a.visible).length;
-            document.getElementById('selected-count-badge').textContent =
-                `${toPersianDigits(selectedCount)}/${toPersianDigits(marketAssets.length)}`;
+            document.getElementById('selected-count-badge').textContent = `${toPersianDigits(selectedCount)}/${toPersianDigits(marketAssets.length)}`;
 
             const filtered = marketAssets.filter(asset => {
                 if (!asset.visible) return false;
@@ -1558,62 +1018,38 @@
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full ios-glass rounded-3xl p-8 text-center space-y-3">
-                        <i class="fa-solid fa-eye-slash text-2xl text-slate-400"></i>
-                        <p class="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">
-                            هیچ دارایی برای نمایش در این دسته انتخاب نشده است.
-                        </p>
-                        <button onclick="openCustomizeModal()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">
-                            انتخاب دارایی‌ها
-                        </button>
-                    </div>
-                `;
+                grid.innerHTML = `<div class="col-span-full ios-glass rounded-3xl p-8 text-center space-y-3"><p class="text-xs font-bold text-slate-600 dark:text-slate-300">هیچ دارایی برای نمایش انتخاب نشده است.</p><button onclick="openCustomizeModal()" class="px-4 py-2 rounded-xl bg-amber-600 text-white text-xs font-bold">انتخاب دارایی‌ها</button></div>`;
                 return;
             }
 
             grid.innerHTML = filtered.map(asset => {
                 const isUp = asset.change24h >= 0;
-                const changeColor = isUp
-                    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/25'
-                    : 'text-rose-600 dark:text-rose-400 bg-rose-500/15 border-rose-500/25';
-                const changeIcon = isUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
-                const changeSign = isUp ? '+' : '';
-
+                const changeColor = isUp ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/25' : 'text-rose-600 dark:text-rose-400 bg-rose-500/15 border-rose-500/25';
                 const flashObj = changedItems.find(c => c.id === asset.id);
                 const flashClass = flashObj ? (flashObj.dir === 'up' ? 'flash-up' : 'flash-down') : '';
-
-                const cryptoSubtitle = asset.category === 'crypto'
-                    ? `<span dir="ltr" class="text-[11px] font-bold text-slate-400 dark:text-slate-400 block">$${formatUSD(asset.priceUSD)} USD</span>`
-                    : `<span class="text-[10px] font-medium text-slate-400 dark:text-slate-500 block">هر ${asset.unit}</span>`;
+                const cryptoSubtitle = asset.category === 'crypto' ? `<span dir="ltr" class="text-[11px] font-bold text-slate-400 block">$${formatUSD(asset.priceUSD)} USD</span>` : `<span class="text-[10px] font-medium text-slate-400 block">هر ${asset.unit}</span>`;
 
                 return `
-                    <div class="ios-glass rounded-2xl p-3.5 flex items-center justify-between gap-2 hover:border-blue-400/40 ${flashClass}">
+                    <div class="ios-glass rounded-2xl p-3.5 flex items-center justify-between gap-2 hover:border-amber-400/40 ${flashClass}">
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="w-10 h-10 rounded-2xl bg-slate-200/70 dark:bg-slate-800/80 flex items-center justify-center shrink-0 border border-white/40 dark:border-white/5">
                                 <i class="${asset.icon} ${asset.iconColor} text-base"></i>
                             </div>
                             <div class="min-w-0">
-                                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">
-                                    ${asset.name}
-                                </h3>
+                                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${asset.name}</h3>
                                 ${cryptoSubtitle}
                             </div>
                         </div>
-
                         <div class="flex flex-col items-end shrink-0">
                             <div class="flex items-baseline gap-1">
-                                <span class="text-sm sm:text-base font-black tabular-nums-fa text-slate-900 dark:text-white">
-                                    ${formatToman(asset.priceToman)}
-                                </span>
+                                <span class="text-sm sm:text-base font-black tabular-nums-fa text-slate-900 dark:text-white">${formatToman(asset.priceToman)}</span>
                                 <span class="text-[10px] font-semibold text-slate-400">تومان</span>
                             </div>
-
                             <div class="flex items-center gap-2 mt-1">
                                 ${generateMiniSparkline(isUp)}
                                 <span dir="ltr" class="px-2 py-0.5 rounded-lg text-[11px] font-extrabold border tabular-nums-fa flex items-center gap-1 ${changeColor}">
-                                    <i class="fa-solid ${changeIcon} text-[9px]"></i>
-                                    ${changeSign}${toPersianDigits(asset.change24h.toFixed(2))}%
+                                    <i class="fa-solid ${isUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'} text-[9px]"></i>
+                                    ${isUp ? '+' : ''}${toPersianDigits(asset.change24h.toFixed(2))}%
                                 </span>
                             </div>
                         </div>
@@ -1622,20 +1058,15 @@
             }).join('');
         }
 
-        /* ============================================================================
-         * 8. CUSTOMIZE MODAL LOGIC
-         * ============================================================================ */
         function openCustomizeModal() {
-            const modal = document.getElementById('customize-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            document.getElementById('customize-modal').classList.remove('hidden');
+            document.getElementById('customize-modal').classList.add('flex');
             renderCustomizeChecklist();
         }
 
         function closeCustomizeModal() {
-            const modal = document.getElementById('customize-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('customize-modal').classList.add('hidden');
+            document.getElementById('customize-modal').classList.remove('flex');
             savePersistedState();
             renderMarketGrid();
         }
@@ -1643,21 +1074,17 @@
         function renderCustomizeChecklist() {
             const listEl = document.getElementById('customize-list');
             const selectedCount = marketAssets.filter(a => a.visible).length;
-            document.getElementById('modal-selected-counter').textContent =
-                `${toPersianDigits(selectedCount)} مورد انتخاب شده`;
-
+            document.getElementById('modal-selected-counter').textContent = `${toPersianDigits(selectedCount)} مورد`;
             listEl.innerHTML = marketAssets.map(asset => `
-                <label class="ios-glass rounded-2xl p-3 flex items-center justify-between cursor-pointer hover:border-blue-500/40">
+                <label class="ios-glass rounded-2xl p-3 flex items-center justify-between cursor-pointer hover:border-amber-500/40">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-slate-200/70 dark:bg-slate-800 flex items-center justify-center">
-                            <i class="${asset.icon} ${asset.iconColor}"></i>
-                        </div>
+                        <div class="w-9 h-9 rounded-xl bg-slate-200/70 dark:bg-slate-800 flex items-center justify-center"><i class="${asset.icon} ${asset.iconColor}"></i></div>
                         <div>
                             <div class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">${asset.name}</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 tabular-nums-fa">${formatToman(asset.priceToman)} تومان</div>
+                            <div class="text-[11px] text-slate-500 tabular-nums-fa">${formatToman(asset.priceToman)} تومان</div>
                         </div>
                     </div>
-                    <input type="checkbox" ${asset.visible ? 'checked' : ''} onchange="toggleAssetVisibility('${asset.id}', this.checked)" class="w-5 h-5 accent-blue-600 rounded-lg cursor-pointer">
+                    <input type="checkbox" ${asset.visible ? 'checked' : ''} onchange="toggleAssetVisibility('${asset.id}', this.checked)" class="w-5 h-5 accent-amber-600 rounded-lg cursor-pointer">
                 </label>
             `).join('');
         }
@@ -1670,18 +1097,12 @@
         }
 
         function toggleAllVisibility(selectAll) {
-            const keyDefaults = ['geram18', 'sekee', 'usd', 'eur', 'aed', 'btc', 'eth'];
-            marketAssets.forEach(a => {
-                a.visible = selectAll ? true : keyDefaults.includes(a.id);
-            });
+            const keys = ['geram18', 'sekee', 'usd', 'eur', 'aed', 'btc', 'eth'];
+            marketAssets.forEach(a => { a.visible = selectAll ? true : keys.includes(a.id); });
             renderCustomizeChecklist();
             renderMarketGrid();
         }
 
-        /* */
-        /* ============================================================================
-         * 9. WEALTH MANAGEMENT SECTION («دارایی های من»)
-         * ============================================================================ */
         function getLiveUsdRate() {
             const usd = marketAssets.find(a => a.id === 'usd');
             return usd && usd.priceToman > 0 ? usd.priceToman : 260800;
@@ -1691,75 +1112,44 @@
             const usdRate = getLiveUsdRate();
             let totalToman = 0;
             let weighted24hSum = 0;
-
-            Object.keys(userHoldings).forEach(assetId => {
-                const qty = parseFloat(userHoldings[assetId]) || 0;
+            Object.keys(userHoldings).forEach(id => {
+                const qty = parseFloat(userHoldings[id]) || 0;
                 if (qty <= 0) return;
-                const asset = marketAssets.find(a => a.id === assetId);
+                const asset = marketAssets.find(a => a.id === id);
                 if (!asset) return;
-
-                const valueToman = qty * asset.priceToman;
-                totalToman += valueToman;
-                weighted24hSum += valueToman * asset.change24h;
+                const valT = qty * asset.priceToman;
+                totalToman += valT;
+                weighted24hSum += valT * asset.change24h;
             });
-
-            const totalRial = totalToman * 10;
-            const totalUSD = usdRate > 0 ? totalToman / usdRate : 0;
-            const weightedChange24h = totalToman > 0 ? weighted24hSum / totalToman : 0;
-
-            return { totalToman, totalRial, totalUSD, usdRate, weightedChange24h };
+            return {
+                totalToman,
+                totalRial: totalToman * 10,
+                totalUSD: usdRate > 0 ? totalToman / usdRate : 0,
+                usdRate,
+                weightedChange24h: totalToman > 0 ? weighted24hSum / totalToman : 0
+            };
         }
 
         function renderUserAssets() {
             const { totalToman, totalRial, totalUSD, usdRate, weightedChange24h } = calculateTotalWealth();
-
-            // Update 3 Simultaneous Totals
             document.getElementById('total-toman').textContent = formatToman(totalToman);
             document.getElementById('total-rial').textContent = formatToman(totalRial);
             document.getElementById('total-usd').textContent = formatUSD(totalUSD);
             document.getElementById('usd-rate-hint').textContent = `نرخ دلار: ${formatToman(usdRate)} ت`;
 
-            // Update 24h Overall Badge
             const badge = document.getElementById('portfolio-24h-badge');
             const isUp = weightedChange24h >= 0;
-            badge.className = `px-2.5 py-1 rounded-xl text-xs font-extrabold tabular-nums-fa flex items-center gap-1 border ${
-                isUp
-                    ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                    : 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30'
-            }`;
-            badge.innerHTML = `
-                <i class="fa-solid ${isUp ? 'fa-caret-up' : 'fa-caret-down'}"></i>
-                <span dir="ltr">${isUp ? '+' : ''}${toPersianDigits(weightedChange24h.toFixed(2))}% (۲۴ ساعت)</span>
-            `;
+            badge.className = `px-2.5 py-1 rounded-xl text-xs font-extrabold tabular-nums-fa flex items-center gap-1 border ${isUp ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' : 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30'}`;
+            badge.innerHTML = `<i class="fa-solid ${isUp ? 'fa-caret-up' : 'fa-caret-down'}"></i><span dir="ltr">${isUp ? '+' : ''}${toPersianDigits(weightedChange24h.toFixed(2))}% (۲۴ ساعت)</span>`;
 
-            // Render Holdings List
             const listContainer = document.getElementById('user-assets-list');
-            const activeEntries = Object.entries(userHoldings)
-                .filter(([_, qty]) => parseFloat(qty) > 0)
-                .map(([id, qty]) => {
-                    const asset = marketAssets.find(a => a.id === id);
-                    return asset ? { asset, qty: parseFloat(qty), valToman: parseFloat(qty) * asset.priceToman } : null;
-                })
-                .filter(Boolean)
-                .sort((a, b) => b.valToman - a.valToman);
+            const activeEntries = Object.entries(userHoldings).filter(([_, qty]) => parseFloat(qty) > 0).map(([id, qty]) => {
+                const asset = marketAssets.find(a => a.id === id);
+                return asset ? { asset, qty: parseFloat(qty), valToman: parseFloat(qty) * asset.priceToman } : null;
+            }).filter(Boolean).sort((a, b) => b.valToman - a.valToman);
 
             if (activeEntries.length === 0) {
-                listContainer.innerHTML = `
-                    <div class="ios-glass rounded-3xl p-7 text-center space-y-3">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-500 flex items-center justify-center mx-auto">
-                            <i class="fa-solid fa-folder-plus text-xl"></i>
-                        </div>
-                        <div class="text-sm font-extrabold text-slate-800 dark:text-slate-100">
-                            هنوز دارایی در سبد خود ثبت نکرده‌اید
-                        </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                            با زدن دکمه «+ افزودن دارایی» مقدار طلا، سکه، ارز یا رمزارز خود را وارد کنید تا ارزش لحظه‌ای آن محاسبه شود.
-                        </p>
-                        <button onclick="openAssetModal()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-extrabold">
-                            + افزودن اولین دارایی
-                        </button>
-                    </div>
-                `;
+                listContainer.innerHTML = `<div class="ios-glass rounded-3xl p-7 text-center space-y-3"><div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center mx-auto"><i class="fa-solid fa-folder-plus text-xl"></i></div><div class="text-sm font-extrabold text-slate-800 dark:text-slate-100">هنوز دارایی ثبت نکرده‌اید</div><button onclick="openAssetModal()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">+ افزودن دارایی</button></div>`;
                 return;
             }
 
@@ -1767,10 +1157,6 @@
                 const valUSD = valToman / usdRate;
                 const sharePct = totalToman > 0 ? (valToman / totalToman) * 100 : 0;
                 const isAssetUp = asset.change24h >= 0;
-                const changeBadgeClass = isAssetUp
-                    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/25'
-                    : 'text-rose-600 dark:text-rose-400 bg-rose-500/15 border-rose-500/25';
-
                 return `
                     <div class="ios-glass rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-emerald-500/35">
                         <div class="flex items-center justify-between sm:justify-start gap-3">
@@ -1781,40 +1167,27 @@
                                 <div>
                                     <div class="flex items-center gap-2">
                                         <h4 class="text-sm font-extrabold text-slate-900 dark:text-white">${asset.name}</h4>
-                                        <span dir="ltr" class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold border tabular-nums-fa ${changeBadgeClass}">
+                                        <span dir="ltr" class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold border tabular-nums-fa ${isAssetUp ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/25' : 'text-rose-600 dark:text-rose-400 bg-rose-500/15 border-rose-500/25'}">
                                             ${isAssetUp ? '+' : ''}${toPersianDigits(asset.change24h.toFixed(2))}%
                                         </span>
                                     </div>
-                                    <div class="text-xs font-bold text-blue-600 dark:text-sky-400 mt-0.5 tabular-nums-fa">
-                                        مقدار دارایی: ${formatQuantity(qty)} ${asset.unit}
-                                        <span class="text-[10px] text-slate-400 font-normal mr-1">(${toPersianDigits(sharePct.toFixed(1))}٪ از سبد)</span>
+                                    <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400 mt-0.5 tabular-nums-fa">
+                                        مقدار: ${formatQuantity(qty)} ${asset.unit} <span class="text-[10px] text-slate-400">(${toPersianDigits(sharePct.toFixed(1))}٪ سبد)</span>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Mobile Quick Edit Button -->
-                            <button onclick="openAssetModal('${asset.id}')" class="sm:hidden w-8 h-8 rounded-xl ios-glass flex items-center justify-center text-slate-500">
-                                <i class="fa-solid fa-pen text-xs"></i>
-                            </button>
+                            <button onclick="openAssetModal('${asset.id}')" class="sm:hidden w-8 h-8 rounded-xl ios-glass flex items-center justify-center text-slate-500"><i class="fa-solid fa-pen text-xs"></i></button>
                         </div>
-
                         <div class="flex items-center justify-between sm:justify-end gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200/50 dark:border-white/5">
                             <div class="text-right sm:text-left">
                                 <div class="text-sm sm:text-base font-black tabular-nums-fa text-slate-900 dark:text-white">
                                     ${formatToman(valToman)} <span class="text-[11px] font-semibold text-slate-400">تومان</span>
                                 </div>
-                                <div dir="ltr" class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 tabular-nums-fa">
-                                    $${formatUSD(valUSD)} USD
-                                </div>
+                                <div dir="ltr" class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 tabular-nums-fa">$${formatUSD(valUSD)} USD</div>
                             </div>
-
                             <div class="hidden sm:flex items-center gap-1.5">
-                                <button onclick="openAssetModal('${asset.id}')" title="ویرایش مقدار" class="w-8 h-8 rounded-xl ios-glass ios-press flex items-center justify-center text-slate-500 hover:text-blue-500">
-                                    <i class="fa-solid fa-pen text-xs"></i>
-                                </button>
-                                <button onclick="removeSingleHolding('${asset.id}')" title="حذف دارایی" class="w-8 h-8 rounded-xl ios-glass ios-press flex items-center justify-center text-slate-500 hover:text-rose-500">
-                                    <i class="fa-solid fa-trash-can text-xs"></i>
-                                </button>
+                                <button onclick="openAssetModal('${asset.id}')" class="w-8 h-8 rounded-xl ios-glass ios-press flex items-center justify-center text-slate-500 hover:text-emerald-500"><i class="fa-solid fa-pen text-xs"></i></button>
+                                <button onclick="removeSingleHolding('${asset.id}')" class="w-8 h-8 rounded-xl ios-glass ios-press flex items-center justify-center text-slate-500 hover:text-rose-500"><i class="fa-solid fa-trash-can text-xs"></i></button>
                             </div>
                         </div>
                     </div>
@@ -1822,79 +1195,50 @@
             }).join('');
         }
 
-        function removeSingleHolding(assetId) {
-            delete userHoldings[assetId];
+        function removeSingleHolding(id) {
+            delete userHoldings[id];
             savePersistedState();
             renderUserAssets();
             renderPortfolioAnalysis();
-            showToast('دارایی از لیست شما حذف شد');
+            showToast('دارایی حذف شد');
         }
 
-        /* ============================================================================
-         * 10. ADD / EDIT ASSET MODAL LOGIC
-         * ============================================================================ */
-        function openAssetModal(focusAssetId = null) {
-            const modal = document.getElementById('asset-modal');
+        function openAssetModal(focusId = null) {
             document.getElementById('asset-search-input').value = '';
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            document.getElementById('asset-modal').classList.remove('hidden');
+            document.getElementById('asset-modal').classList.add('flex');
             renderAssetModalList();
-
-            if (focusAssetId) {
+            if (focusId) {
                 setTimeout(() => {
-                    const input = document.getElementById(`qty-input-${focusAssetId}`);
-                    if (input) {
-                        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        input.focus();
-                        input.select();
-                    }
+                    const input = document.getElementById(`qty-input-${focusId}`);
+                    if (input) { input.scrollIntoView({ behavior: 'smooth', block: 'center' }); input.focus(); input.select(); }
                 }, 120);
             }
         }
 
         function closeAssetModal() {
-            const modal = document.getElementById('asset-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('asset-modal').classList.add('hidden');
+            document.getElementById('asset-modal').classList.remove('flex');
         }
 
         function renderAssetModalList() {
             const query = (document.getElementById('asset-search-input').value || '').trim().toLowerCase();
             const container = document.getElementById('asset-modal-inputs');
-
             const filtered = marketAssets.filter(a => a.name.toLowerCase().includes(query) || a.id.includes(query));
-
             container.innerHTML = filtered.map(asset => {
                 const currentQty = userHoldings[asset.id] !== undefined ? userHoldings[asset.id] : '';
                 return `
                     <div class="ios-glass rounded-2xl p-3 flex items-center justify-between gap-3">
                         <div class="flex items-center gap-2.5 min-w-0">
-                            <div class="w-9 h-9 rounded-xl bg-slate-200/70 dark:bg-slate-800 flex items-center justify-center shrink-0">
-                                <i class="${asset.icon} ${asset.iconColor}"></i>
-                            </div>
+                            <div class="w-9 h-9 rounded-xl bg-slate-200/70 dark:bg-slate-800 flex items-center justify-center shrink-0"><i class="${asset.icon} ${asset.iconColor}"></i></div>
                             <div class="min-w-0">
                                 <div class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${asset.name}</div>
-                                <div class="text-[10px] text-slate-500 dark:text-slate-400 tabular-nums-fa">
-                                    نرخ واحد: ${formatToman(asset.priceToman)} تومان
-                                </div>
+                                <div class="text-[10px] text-slate-500 tabular-nums-fa">نرخ: ${formatToman(asset.priceToman)} ت</div>
                             </div>
                         </div>
-
                         <div class="flex items-center gap-1.5 shrink-0">
-                            <input
-                                id="qty-input-${asset.id}"
-                                data-asset-id="${asset.id}"
-                                type="number"
-                                step="any"
-                                min="0"
-                                dir="ltr"
-                                value="${currentQty}"
-                                placeholder="0"
-                                class="asset-qty-field w-28 sm:w-32 px-3 py-2 rounded-xl bg-white/80 dark:bg-slate-900/90 border border-slate-300/70 dark:border-white/15 text-sm font-extrabold text-left text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 w-12 truncate">
-                                ${asset.unit}
-                            </span>
+                            <input id="qty-input-${asset.id}" data-asset-id="${asset.id}" type="number" step="any" min="0" dir="ltr" value="${currentQty}" placeholder="0" class="asset-qty-field w-28 sm:w-32 px-3 py-2 rounded-xl bg-white/80 dark:bg-slate-900/90 border border-slate-300 dark:border-white/15 text-sm font-extrabold text-left text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <span class="text-[11px] font-bold text-slate-500 w-12 truncate">${asset.unit}</span>
                         </div>
                     </div>
                 `;
@@ -1902,28 +1246,19 @@
         }
 
         function saveAllAssetInputs() {
-            const inputs = document.querySelectorAll('.asset-qty-field');
-            inputs.forEach(input => {
+            document.querySelectorAll('.asset-qty-field').forEach(input => {
                 const id = input.getAttribute('data-asset-id');
                 const val = parseFloat(input.value);
-                if (!isNaN(val) && val > 0) {
-                    userHoldings[id] = val;
-                } else {
-                    delete userHoldings[id];
-                }
+                if (!isNaN(val) && val > 0) userHoldings[id] = val;
+                else delete userHoldings[id];
             });
-
             savePersistedState();
             closeAssetModal();
             renderUserAssets();
             renderPortfolioAnalysis();
-            showToast('سبد دارایی‌های شما با موفقیت بروزرسانی شد');
+            showToast('سبد دارایی‌ها ذخیره شد');
         }
 
-        /* */
-        /* ============================================================================
-         * 11. PORTFOLIO PERFORMANCE ENGINE (1M, 3M, 5M, 6M, 1Y, 2Y, 3Y, 4Y)
-         * ============================================================================ */
         const PORTFOLIO_PERIODS = {
             '1M': { label: '۱ ماهه', months: 1, points: 30, volatility: 0.025 },
             '3M': { label: '۳ ماهه', months: 3, points: 36, volatility: 0.04 },
@@ -1937,124 +1272,84 @@
 
         let currentChartSeries = [];
 
-        function selectPortfolioPeriod(periodKey) {
-            activePortfolioPeriod = periodKey;
+        function selectPortfolioPeriod(key) {
+            activePortfolioPeriod = key;
             document.querySelectorAll('.period-tab').forEach(btn => {
-                if (btn.getAttribute('data-period') === periodKey) {
-                    btn.className = 'period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all bg-gradient-to-l from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/25';
+                if (btn.getAttribute('data-period') === key) {
+                    btn.className = 'period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all bg-gradient-to-l from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/25';
                 } else {
-                    btn.className = 'period-tab ios-press flex-1 shrink-0 px-3 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+                    btn.className = 'period-tab ios-press flex-1 shrink-0 px-2.5 py-2 rounded-xl text-xs font-extrabold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
                 }
             });
             renderPortfolioAnalysis();
         }
 
-        function computePortfolioTrajectory(periodKey) {
-            const cfg = PORTFOLIO_PERIODS[periodKey] || PORTFOLIO_PERIODS['1M'];
+        function computePortfolioTrajectory(key) {
+            const cfg = PORTFOLIO_PERIODS[key] || PORTFOLIO_PERIODS['1M'];
             const { totalToman, usdRate } = calculateTotalWealth();
-
-            // Calculate weighted annual growth rate based on user's actual asset mix
             let weightedAnnualRate = 0.62;
             if (totalToman > 0) {
                 let acc = 0;
                 Object.entries(userHoldings).forEach(([id, qty]) => {
                     const asset = marketAssets.find(a => a.id === id);
-                    if (asset && qty > 0) {
-                        acc += (qty * asset.priceToman) * (asset.annualGrowthRate || 0.58);
-                    }
+                    if (asset && qty > 0) acc += (qty * asset.priceToman) * (asset.annualGrowthRate || 0.58);
                 });
                 weightedAnnualRate = acc / totalToman;
             }
-
             const years = cfg.months / 12;
-            // Compound growth factor over the selected period
             const totalGrowthFactor = Math.pow(1 + weightedAnnualRate, years);
             const startValueToman = totalToman > 0 ? totalToman / totalGrowthFactor : 0;
-
             const series = [];
-            const numPoints = cfg.points;
-
-            for (let i = 0; i <= numPoints; i++) {
-                const progress = i / numPoints;
-                // Deterministic wave pattern so the chart is smooth and realistic
+            for (let i = 0; i <= cfg.points; i++) {
+                const progress = i / cfg.points;
                 const wave1 = Math.sin(progress * Math.PI * 3.5 + cfg.months) * cfg.volatility * 0.45;
                 const wave2 = Math.cos(progress * Math.PI * 7 - cfg.months) * cfg.volatility * 0.2;
-                const envelope = Math.sin(progress * Math.PI); // 0 at start & end so endpoints match exact values
-
-                const expCurve = Math.pow(totalGrowthFactor, progress);
-                const valToman = startValueToman * expCurve * (1 + (wave1 + wave2) * envelope);
-                series.push({
-                    step: i,
-                    progress,
-                    toman: Math.round(valToman),
-                    usd: usdRate > 0 ? valToman / usdRate : 0
-                });
+                const envelope = Math.sin(progress * Math.PI);
+                const valToman = startValueToman * Math.pow(totalGrowthFactor, progress) * (1 + (wave1 + wave2) * envelope);
+                series.push({ step: i, toman: Math.round(valToman), usd: usdRate > 0 ? valToman / usdRate : 0 });
             }
-
-            // Ensure last point equals current live portfolio value
             if (series.length > 0) {
                 series[series.length - 1].toman = Math.round(totalToman);
                 series[series.length - 1].usd = usdRate > 0 ? totalToman / usdRate : 0;
             }
-
-            const finalToman = totalToman;
-            const diffToman = finalToman - startValueToman;
+            const diffToman = totalToman - startValueToman;
             const diffUSD = usdRate > 0 ? diffToman / usdRate : 0;
             const pctReturn = startValueToman > 0 ? (diffToman / startValueToman) * 100 : 0;
-
-            return {
-                cfg,
-                series,
-                startValueToman,
-                finalToman,
-                diffToman,
-                diffUSD,
-                pctReturn
-            };
+            return { cfg, series, diffToman, diffUSD, pctReturn };
         }
 
         function renderPortfolioAnalysis() {
             const data = computePortfolioTrajectory(activePortfolioPeriod);
             currentChartSeries = data.series;
-
             document.getElementById('period-label-title').textContent = data.cfg.label;
             document.getElementById('chart-start-label').textContent = `${data.cfg.label} قبل`;
 
             const isProfit = data.diffToman >= 0;
-            const colorClass = isProfit
-                ? 'text-emerald-600 dark:text-emerald-400'
-                : 'text-rose-600 dark:text-rose-400';
+            const colorClass = isProfit ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
             const sign = isProfit ? '+' : '-';
 
             const pnlPercentEl = document.getElementById('pnl-percent');
-            const pnlTomanEl = document.getElementById('pnl-toman');
-            const pnlUsdEl = document.getElementById('pnl-usd');
-
             pnlPercentEl.className = `text-xl sm:text-2xl font-black tabular-nums-fa mt-1 ${colorClass}`;
             pnlPercentEl.textContent = `${sign}${toPersianDigits(Math.abs(data.pctReturn).toFixed(2))}٪`;
 
+            const pnlTomanEl = document.getElementById('pnl-toman');
             pnlTomanEl.className = `text-base sm:text-lg font-extrabold tabular-nums-fa mt-1 ${colorClass}`;
             pnlTomanEl.textContent = `${sign}${formatToman(Math.abs(data.diffToman))} تومان`;
 
+            const pnlUsdEl = document.getElementById('pnl-usd');
             pnlUsdEl.className = `text-base sm:text-lg font-extrabold tabular-nums-fa mt-1 text-left ${colorClass}`;
             pnlUsdEl.textContent = `${sign}$${formatUSD(Math.abs(data.diffUSD))}`;
 
-            const statusDot = document.getElementById('chart-status-dot');
-            statusDot.className = `w-2.5 h-2.5 rounded-full ${isProfit ? 'bg-emerald-500' : 'bg-rose-500'}`;
-
+            document.getElementById('chart-status-dot').className = `w-2.5 h-2.5 rounded-full ${isProfit ? 'bg-emerald-500' : 'bg-rose-500'}`;
             renderPortfolioChart();
         }
 
-        /* ============================================================================
-         * 12. INTERACTIVE CANVAS PORTFOLIO CHART WITH TOUCH & MOUSE CROSSHAIR
-         * ============================================================================ */
         function renderPortfolioChart(hoverIndex = null) {
             const canvas = document.getElementById('portfolio-chart');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             const rect = canvas.parentElement.getBoundingClientRect();
             const dpr = window.devicePixelRatio || 1;
-
             canvas.width = rect.width * dpr;
             canvas.height = rect.height * dpr;
             ctx.scale(dpr, dpr);
@@ -2062,7 +1357,6 @@
             const width = rect.width;
             const height = rect.height;
             ctx.clearRect(0, 0, width, height);
-
             if (!currentChartSeries || currentChartSeries.length < 2) return;
 
             const isDark = document.documentElement.classList.contains('dark');
@@ -2070,40 +1364,28 @@
             const minVal = Math.min(...values);
             const maxVal = Math.max(...values);
             const range = maxVal - minVal || 1;
-
-            const padTop = 22;
-            const padBottom = 24;
-            const padX = 12;
-            const usableW = width - padX * 2;
-            const usableH = height - padTop - padBottom;
-
+            const padTop = 22, padBottom = 24, padX = 12;
+            const usableW = width - padX * 2, usableH = height - padTop - padBottom;
             const isProfit = values[values.length - 1] >= values[0];
-            const strokeColor = isProfit ? '#30D158' : '#FF453A';
-            const glowColor = isProfit ? 'rgba(48, 209, 88, 0.36)' : 'rgba(255, 69, 58, 0.36)';
-            const fadeColor = isProfit ? 'rgba(48, 209, 88, 0.0)' : 'rgba(255, 69, 58, 0.0)';
+            const strokeColor = isProfit ? '#a855f7' : '#FF453A';
+            const glowColor = isProfit ? 'rgba(168, 85, 247, 0.35)' : 'rgba(255, 69, 58, 0.35)';
 
-            // Horizontal subtle grid lines
             ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.06)';
             ctx.lineWidth = 1;
             for (let g = 0; g <= 3; g++) {
                 const y = padTop + (usableH / 3) * g;
-                ctx.beginPath();
-                ctx.moveTo(padX, y);
-                ctx.lineTo(width - padX, y);
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width - padX, y); ctx.stroke();
             }
 
-            // Map coordinates
-            const coords = currentChartSeries.map((pt, idx) => {
-                const x = padX + (idx / (currentChartSeries.length - 1)) * usableW;
-                const y = padTop + usableH - ((pt.toman - minVal) / range) * usableH;
-                return { x, y, pt };
-            });
+            const coords = currentChartSeries.map((pt, idx) => ({
+                x: padX + (idx / (currentChartSeries.length - 1)) * usableW,
+                y: padTop + usableH - ((pt.toman - minVal) / range) * usableH,
+                pt
+            }));
 
-            // Area fill gradient
             const grad = ctx.createLinearGradient(0, padTop, 0, height - padBottom);
             grad.addColorStop(0, glowColor);
-            grad.addColorStop(1, fadeColor);
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
 
             ctx.beginPath();
             ctx.moveTo(coords[0].x, height - padBottom);
@@ -2113,15 +1395,11 @@
             ctx.fillStyle = grad;
             ctx.fill();
 
-            // Smooth curve line
             ctx.beginPath();
             ctx.moveTo(coords[0].x, coords[0].y);
             for (let i = 1; i < coords.length; i++) {
-                const prev = coords[i - 1];
-                const curr = coords[i];
-                const midX = (prev.x + curr.x) / 2;
-                const midY = (prev.y + curr.y) / 2;
-                ctx.quadraticCurveTo(prev.x, prev.y, midX, midY);
+                const prev = coords[i - 1], curr = coords[i];
+                ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + curr.x) / 2, (prev.y + curr.y) / 2);
             }
             ctx.lineTo(coords[coords.length - 1].x, coords[coords.length - 1].y);
             ctx.strokeStyle = strokeColor;
@@ -2129,29 +1407,18 @@
             ctx.lineCap = 'round';
             ctx.stroke();
 
-            // Active hover / touch point or final endpoint pulse dot
             const activeIdx = hoverIndex !== null ? hoverIndex : coords.length - 1;
             const activeCoord = coords[activeIdx];
-
             if (activeCoord) {
                 if (hoverIndex !== null) {
-                    ctx.beginPath();
-                    ctx.setLineDash([4, 4]);
-                    ctx.moveTo(activeCoord.x, padTop);
-                    ctx.lineTo(activeCoord.x, height - padBottom);
+                    ctx.beginPath(); ctx.setLineDash([4, 4]);
+                    ctx.moveTo(activeCoord.x, padTop); ctx.lineTo(activeCoord.x, height - padBottom);
                     ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(15,23,42,0.35)';
-                    ctx.lineWidth = 1.2;
-                    ctx.stroke();
-                    ctx.setLineDash([]);
+                    ctx.lineWidth = 1.2; ctx.stroke(); ctx.setLineDash([]);
                 }
-
-                ctx.beginPath();
-                ctx.arc(activeCoord.x, activeCoord.y, 6, 0, Math.PI * 2);
-                ctx.fillStyle = strokeColor;
-                ctx.fill();
-                ctx.lineWidth = 2.5;
-                ctx.strokeStyle = isDark ? '#0f172a' : '#ffffff';
-                ctx.stroke();
+                ctx.beginPath(); ctx.arc(activeCoord.x, activeCoord.y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = strokeColor; ctx.fill();
+                ctx.lineWidth = 2.5; ctx.strokeStyle = isDark ? '#0f172a' : '#ffffff'; ctx.stroke();
             }
         }
 
@@ -2159,128 +1426,93 @@
             const canvas = document.getElementById('portfolio-chart');
             const readout = document.getElementById('chart-hover-readout');
             if (!canvas) return;
-
-            function handlePointer(clientX) {
+            const handlePointer = (clientX) => {
                 const rect = canvas.getBoundingClientRect();
-                const relX = Math.max(0, Math.min(rect.width, clientX - rect.left));
-                const ratio = relX / rect.width;
-                const idx = Math.min(
-                    currentChartSeries.length - 1,
-                    Math.max(0, Math.round(ratio * (currentChartSeries.length - 1)))
-                );
+                const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                const idx = Math.min(currentChartSeries.length - 1, Math.max(0, Math.round(ratio * (currentChartSeries.length - 1))));
                 const point = currentChartSeries[idx];
                 if (point) {
                     readout.textContent = `${formatToman(point.toman)} تومان ($${formatUSD(point.usd)})`;
                     renderPortfolioChart(idx);
                 }
-            }
-
+            };
             canvas.addEventListener('mousemove', e => handlePointer(e.clientX));
-            canvas.addEventListener('touchmove', e => {
-                if (e.touches && e.touches[0]) {
-                    handlePointer(e.touches[0].clientX);
-                }
-            }, { passive: true });
-
+            canvas.addEventListener('touchmove', e => { if (e.touches && e.touches[0]) handlePointer(e.touches[0].clientX); }, { passive: true });
             canvas.addEventListener('mouseleave', () => {
                 readout.textContent = 'برای مشاهده جزئیات، نمودار را لمس کنید';
                 renderPortfolioChart(null);
             });
         }
 
-        /* */
-        /* ============================================================================
-         * 13. ADDITIONAL UI HELPERS (COPY AD EMAIL, PWA GUIDE, NAVIGATION)
-         * ============================================================================ */
+        /* Scroll Observer to highlight bottom dock icons based on current section */
+        function initScrollSpy() {
+            const sections = [
+                { id: 'section-clock', btn: 'nav-btn-clock', color: 'text-sky-500' },
+                { id: 'section-markets', btn: 'nav-btn-markets', color: 'text-amber-500' },
+                { id: 'section-assets', btn: 'nav-btn-assets', color: 'text-emerald-500' },
+                { id: 'section-portfolio', btn: 'nav-btn-portfolio', color: 'text-purple-500' }
+            ];
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const matched = sections.find(s => s.id === entry.target.id);
+                        if (matched) {
+                            document.querySelectorAll('.dock-nav-btn').forEach(b => {
+                                if (!b.onclick || !b.onclick.toString().includes('openAssetModal')) {
+                                    b.classList.remove('text-sky-500', 'text-amber-500', 'text-emerald-500', 'text-purple-500', 'bg-white/30', 'dark:bg-white/15');
+                                    b.classList.add('text-slate-500', 'dark:text-slate-400');
+                                }
+                            });
+                            const btnEl = document.getElementById(matched.btn);
+                            if (btnEl) {
+                                btnEl.classList.remove('text-slate-500', 'dark:text-slate-400');
+                                btnEl.classList.add(matched.color, 'bg-white/30', 'dark:bg-white/15');
+                            }
+                        }
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            sections.forEach(s => {
+                const el = document.getElementById(s.id);
+                if (el) observer.observe(el);
+            });
+        }
+
         function copyAdEmail() {
-            const email = 'Mahbodq@gmail.com';
-            const tempInput = document.createElement('textarea');
-            tempInput.value = email;
-            document.body.appendChild(tempInput);
-            tempInput.select();
+            const temp = document.createElement('textarea');
+            temp.value = 'Mahbodq@gmail.com';
+            document.body.appendChild(temp);
+            temp.select();
             document.execCommand('copy');
-            document.body.removeChild(tempInput);
-
+            document.body.removeChild(temp);
             const label = document.getElementById('copy-ad-label');
-            if (label) label.textContent = 'کپی شد!';
-            showToast('آدرس ایمیل تبلیغات کپی شد: Mahbodq@gmail.com');
-            setTimeout(() => {
-                if (label) label.textContent = 'کپی ایمیل';
-            }, 2200);
-        }
-
-        function openPwaModal() {
-            const modal = document.getElementById('pwa-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closePwaModal() {
-            const modal = document.getElementById('pwa-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function injectDynamicPwaManifest() {
-            try {
-                const manifestObj = {
-                    name: 'اسکناس | نرخ لحظه‌ای بازار و مدیریت پرتفولیو',
-                    short_name: 'اسکناس',
-                    description: 'نرخ لحظه‌ای طلا، سکه، ارز و رمزارز به همراه مدیریت دارایی و تحلیل پرتفولیو',
-                    start_url: './',
-                    scope: './',
-                    display: 'standalone',
-                    background_color: '#070b14',
-                    theme_color: '#070b14',
-                    orientation: 'portrait',
-                    dir: 'rtl',
-                    lang: 'fa-IR'
-                };
-                const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
-                const manifestUrl = URL.createObjectURL(manifestBlob);
-                const link = document.createElement('link');
-                link.rel = 'manifest';
-                link.href = manifestUrl;
-                document.head.appendChild(link);
-            } catch (_) {}
+            label.textContent = 'کپی شد!';
+            showToast('ایمیل تبلیغات کپی شد');
+            setTimeout(() => { label.textContent = 'کپی ایمیل'; }, 2200);
         }
 
         function scrollToSection(id) {
-            if (id === 'top') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
             const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        /* ============================================================================
-         * 14. INITIALIZATION ON WINDOW LOAD
-         * ============================================================================ */
         window.onload = function () {
             loadPersistedState();
-            injectDynamicPwaManifest();
-
-            // Start live Tehran clock & dual calendar immediately
             updateLiveClockAndCalendar();
             setInterval(updateLiveClockAndCalendar, 1000);
 
-            // Render initial market grid, user holdings, and portfolio analysis
             renderMarketGrid();
             renderUserAssets();
             selectPortfolioPeriod('1M');
             bindChartInteractions();
+            initScrollSpy();
 
-            // Attempt live TGJU fetch & start periodic live market updates
             triggerMarketSync(false);
             setInterval(() => triggerMarketSync(false), 6500);
 
-            // Redraw responsive canvas on resize
-            window.addEventListener('resize', () => {
-                renderPortfolioChart();
-            });
+            window.addEventListener('resize', () => renderPortfolioChart());
         };
     </script>
 </body>
